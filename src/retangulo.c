@@ -91,5 +91,5 @@ void setCORPretangulo(retangulo r, char* corp){
 }
 
 double calcula_area_retangulo(retangulo r){
-    return (w*h);
+    return (((retangulo*)r)->w * ((retangulo*)r)->h);
 }
