@@ -1,6 +1,7 @@
-#include "stdio.h"
-#include "stdlib.h"
-#include "string.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "circulo.h"
 
 #define pi 3.14
 
@@ -27,7 +28,7 @@ circulo criar_circulo(int i, double x, double y, double r, char* corb, char* cor
     c->corp = (char*)malloc(strlen(corp) + 1);
     if(c->corp == NULL){
         printf("Erro ao alocar memoria para a cor do preenchimento");
-        exti(1);
+        exit(1);
     }
     strcpy(c->corp, corp);
     
