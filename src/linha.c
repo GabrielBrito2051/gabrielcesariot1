@@ -26,6 +26,8 @@ linha criar_linha(int i, double x1, double y1, double  x2, double y2, char* cor)
     strcpy(l->cor,cor);
 
     l->corcompl = setCORCOMPLlinha(linha l);
+
+    return l;
 }
 
 int getIlinha(linha l){
