@@ -25,9 +25,14 @@ linha criar_linha(int i, double x1, double y1, double  x2, double y2, char* cor)
     }
     strcpy(l->cor,cor);
 
+    l->corcompl = (char*) malloc(strlen(cor)+1);
+    if(l->corcompl == NULL){
+        printf("Erro ao alocar memoria para a cor complementar da linha");
+        exit(1);
+    }
     l->corcompl = setCORCOMPLlinha(linha l);
 
-    return l;
+    return ((linha*)l);
 }
 
 int getIlinha(linha l){
@@ -82,18 +87,11 @@ void setCORlinha(linha l, char* cor){
     strcpy(((linha*)l)->cor, cor);
 }
 
-// funcao 'setCORCOMPLlinha' ainda incompleta
+// funcao 'setCORCOMPLlinha' ainda em andamento
 void setCORCOMPLlinha(linha l){
-    l->corcompl = (char*)malloc(strlen(cor)+1);
-    if(l->corcompl == NULL){
-        printf("Erro ao alocar memoria para a cor complementar da linha");
-        exit(1);
-    }
-
-    char R[2], G[2], B[2];
-
+    
 }
 
 double calcula_area_linha(linha l){
-    return (sqrt(pow(((linha*)l)->x1 - ((linha*)l)->x2) + pow(((linha*)l)->y1 - ((linha*)l)->y2)));
+    return (2 * sqrt(pow(((linha*)l)->x1 - ((linha*)l)->x2) + pow(((linha*)l)->y1 - ((linha*)l)->y2)));
 }
