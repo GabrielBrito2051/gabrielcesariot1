@@ -87,9 +87,15 @@ void setCORlinha(linha l, char* cor){
     strcpy(((linha*)l)->cor, cor);
 }
 
-// funcao 'setCORCOMPLlinha' ainda em andamento
 void setCORCOMPLlinha(linha l){
-    
+    int r, g, b;
+    int Rcompl, Gcompl, Bcompl;
+    char* p = ((linha*)l)->cor[1];
+    sscanf(p, "%2x%2x%2x", &r, &g, &b);
+    Rcompl = 255 - r;
+    Gcompl = 255 - g;
+    Bcompl = 255 - b;
+    sprintf(((linha*)l)->corcompl, "#%X%X%X", Rcompl, Gcompl, Bcompl);
 }
 
 double calcula_area_linha(linha l){
