@@ -14,38 +14,41 @@ typedef struct{
     pont topo;
 }pilha;
 
-pilha *criar_pilha(){
+Pilha criar_pilha(){
     pilha* p = malloc(sizeof(pilha));
     p->topo = NULL;
 
     return p;
 }
 
-int verifica_se_vazia(pilha *p){
-    return (p->topo == NULL) ? 1 : 0;
+int verifica_se_vazia(Pilha p){
+    return (((pilha*)p)->topo == NULL) ? 1 : 0;
 }
 
-void push(pilha *p, void* forma){
+void push(Pilha p, void* forma){
+    pilha *var = (pilha*) p;
     pont novo = malloc(sizeof(elemento));
     if(novo == NULL){
         printf("Erro ao alocar memoria para a pilha");
         exit(1);
     }
     novo->forma = forma;
-    novo->prox = p->topo;
-    p->topo = novo;
+    novo->prox = var->topo;
+    var->topo = novo;
 }
 
-void pop(pilha *p){
+void pop(Pilha p){
     if(verifica_se_vazia(p)==1){
         printf("Nao foi possivel dar pop, pilha vazia");
         exit(1);
     }
-    pont p = p->topo;
-    p->topo = p->topo->prox;
+    pilha *var = (pilha*) p;
+    pont p = var->topo;
+    var->topo = var->topo->prox;
     free(p);
 }
 
-void* get_topo_pilha(pilha *p){
-    return p->topo->forma;
+void* get_topo_pilha(Pilha p){
+    pilha *var = (pilha*) p;
+    return var->topo->forma;
 }

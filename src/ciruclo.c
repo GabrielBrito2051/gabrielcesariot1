@@ -11,7 +11,7 @@ typedef struct{
     char *corb, *corp;
 }circulo;
 
-circulo criar_circulo(int i, double x, double y, double r, char* corb, char* corp){
+Circulo criar_circulo(int i, double x, double y, double r, char* corb, char* corp){
     circulo *c = malloc(sizeof(circulo));
     c->i = i;
     c->x = x;
@@ -35,54 +35,54 @@ circulo criar_circulo(int i, double x, double y, double r, char* corb, char* cor
     return ((circulo*)c);
 }
 
-int getIcirculo(circulo c){
+int getIcirculo(Circulo c){
     return ((circulo*)c)->i;
 }
 
-double getXcirculo(circulo c){
+double getXcirculo(Circulo c){
     return ((circulo*)c)->x;
 }
 
-double getYcirculo(circulo c){
+double getYcirculo(Circulo c){
     return ((circulo*)c)->y;
 }
 
-double getRcirculo(circulo c){
+double getRcirculo(Circulo c){
     return ((circulo*)c)->r;
 }
 
-char* getCORBcirculo(circulo c){
+char* getCORBcirculo(Circulo c){
     return ((circulo*)c)->corb;
 }
 
-char* getCORPcirculo(circulo c){
+char* getCORPcirculo(Circulo c){
     return ((circulo*)c)->corp;
 }
 
-void setIcirculo(circulo c, int i){
+void setIcirculo(Circulo c, int i){
     ((circulo*)c)->i = i;
 }
 
-void setXcirculo(circulo c, double x){
+void setXcirculo(Circulo c, double x){
     ((circulo*)c)->x = x;
 }
 
-void setYcirculo(circulo c, double y){
+void setYcirculo(Circulo c, double y){
     ((circulo*)c)->y = y;
 }
 
-void setRcirculo(circulo c, double r){
+void setRcirculo(Circulo c, double r){
     ((circulo*)c)->r = r;
 }
 
-void setCORBcirculo(circulo c, char* corb){
+void setCORBcirculo(Circulo c, char* corb){
     strcpy(((circulo*)c)->corb, corb);
 }
 
-void setCORPcirculo(circulo c, char* corp){
-    strcpy(((circulo*)c)->corp, corp)
+void setCORPcirculo(Circulo c, char* corp){
+    strcpy(((circulo*)c)->corp, corp);
 }
 
-double calcula_area_circulo(circulo c){
+double calcula_area_circulo(Circulo c){
     return pi * ((circulo*)c)->r * ((circulo*)c)->r;
 }

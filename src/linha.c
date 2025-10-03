@@ -10,7 +10,7 @@ typedef struct{
     char *cor, *corcompl;
 }linha;
 
-linha criar_linha(int i, double x1, double y1, double  x2, double y2, char* cor){
+Linha criar_linha(int i, double x1, double y1, double  x2, double y2, char* cor){
     linha *l = malloc(sizeof(linha));
     l->i = i;
     l->x1 = x1;
@@ -30,64 +30,64 @@ linha criar_linha(int i, double x1, double y1, double  x2, double y2, char* cor)
         printf("Erro ao alocar memoria para a cor complementar da linha");
         exit(1);
     }
-    l->corcompl = setCORCOMPLlinha(linha l);
+    setCORCOMPLlinha(l);
 
-    return ((linha*)l);
+    return ((Linha*)l);
 }
 
-int getIlinha(linha l){
+int getIlinha(Linha l){
     return ((linha*)l)->i;
 }
 
-double getX1linha(linha l){
+double getX1linha(Linha l){
     return ((linha*)l)->x1;
 }
 
-double getY1linha(linha l){
-    return ((linha*)l)->y1
+double getY1linha(Linha l){
+    return ((linha*)l)->y1;
 }
 
-double getX2linha(linha l){
+double getX2linha(Linha l){
     return ((linha*)l)->x2;
 }
 
-double getY2linha(linha l){
+double getY2linha(Linha l){
     return ((linha*)l)->y2;
 }
 
-char* getCORlinha(linha l){
+char* getCORlinha(Linha l){
     return ((linha*)l)->cor;
 }
 
-char* getCORCOMPLlinha(linha l){
+char* getCORCOMPLlinha(Linha l){
     return ((linha*)l)->corcompl;
 }
 
-void setIlinha(linha l, int i){
+void setIlinha(Linha l, int i){
     ((linha*)l)->i =i;
 }
 
-void setX1linha(linha l, int x1){
+void setX1linha(Linha l, int x1){
     ((linha*)l)->x1 = x1;
 }
 
-void setY1linha(linha l, int y1){
+void setY1linha(Linha l, int y1){
     ((linha*)l)->y1 = y1;
 }
 
-void setX2linha(linha l, int x2){
+void setX2linha(Linha l, int x2){
     ((linha*)l)->x2 = x2;
 }
 
-void setY2linha(linha l, int y2){
+void setY2linha(Linha l, int y2){
     ((linha*)l)->y2 = y2;
 }
 
-void setCORlinha(linha l, char* cor){
+void setCORlinha(Linha l, char* cor){
     strcpy(((linha*)l)->cor, cor);
 }
 
-void setCORCOMPLlinha(linha l){
+void setCORCOMPLlinha(Linha l){
     int r, g, b;
     int Rcompl, Gcompl, Bcompl;
     char* p = ((linha*)l)->cor[1];
@@ -98,6 +98,6 @@ void setCORCOMPLlinha(linha l){
     sprintf(((linha*)l)->corcompl, "#%X%X%X", Rcompl, Gcompl, Bcompl);
 }
 
-double calcula_area_linha(linha l){
-    return (2 * sqrt(pow(((linha*)l)->x1 - ((linha*)l)->x2) + pow(((linha*)l)->y1 - ((linha*)l)->y2)));
+double calcula_area_linha(Linha l){
+    return (2 * sqrt(pow(((linha*)l)->x1 - ((linha*)l)->x2,2) + pow(((linha*)l)->y1 - ((linha*)l)->y2,2)));
 }

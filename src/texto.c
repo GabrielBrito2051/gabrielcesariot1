@@ -10,7 +10,7 @@ typedef struct{
     char a;
 }texto;
 
-texto criar_texto(int i, double x, double y, char* cor, char a, char* txto){
+Texto criar_texto(int i, double x, double y, char* cor, char a, char* txto){
     texto *t = malloc(sizeof(texto));
     t->i = i;
     t->x = x;
@@ -29,56 +29,56 @@ texto criar_texto(int i, double x, double y, char* cor, char a, char* txto){
         printf("Erro ao alocar memoria para a cor complementar do texto");
         exit(1);
     }
-    t->corcompl = setCORCOMPLtexto(texto t);
+    setCORCOMPLtexto(t);
 
     return ((texto*)t);
 }
 
-int getItexto(texto t){
+int getItexto(Texto t){
     return ((texto*)t)->i;
 }
 
-double getXtexto(texto t){
+double getXtexto(Texto t){
     return ((texto*)t)->x;
 }
 
-double getYtexto(texto t){
+double getYtexto(Texto t){
     return ((texto*)t)->y;
 }
 
-char* getCORtexto(texto t){
+char* getCORtexto(Texto t){
     return ((texto*)t)->cor;
 }
 
-char* getCORCOMPLtexto(texto t){
+char* getCORCOMPLtexto(Texto t){
     return ((texto*)t)->corcompl;
 }
 
-char getAtexto(texto t){
+char getAtexto(Texto t){
     return ((texto*)t)->a;
 }
 
-char getTXTOtexto(texto t){
+char* getTXTOtexto(Texto t){
     return ((texto*)t)->txto;
 }
 
-void setItexto(texto t, int i){
+void setItexto(Texto t, int i){
     ((texto*)t)->i = i;
 }
 
-void setXtexto(texto t, double x){
+void setXtexto(Texto t, double x){
     ((texto*)t)->x = x;
 }
 
-void setYtexto(texto t, double y){
+void setYtexto(Texto t, double y){
     ((texto*)t)->y = y;
 }
 
-void setCORtexto(texto t, char* cor){
+void setCORtexto(Texto t, char* cor){
     strcpy(((texto*)t)->cor, cor);
 }
 
-void setCORCOMPLtexto(texto t){
+void setCORCOMPLtexto(Texto t){
     int r, g, b;
     int Rcompl, Gcompl, Bcompl;
     char* p = ((texto*)t)->cor[1];
@@ -89,6 +89,6 @@ void setCORCOMPLtexto(texto t){
     sprintf(((texto*)t)->corcompl, "#%X%X%X", Rcompl, Gcompl, Bcompl);
 }
 
-double calcula_area_texto(texto t){
+double calcula_area_texto(Texto t){
     return (20 * strlen(((texto*)t)->txto));
 }

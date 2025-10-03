@@ -9,7 +9,7 @@ typedef struct{
     char *corb, *corp;
 }retangulo;
 
-retangulo criar_retangulo(int i, double x, double y, double w, double h, char* corb, char* corp){
+Retangulo criar_retangulo(int i, double x, double y, double w, double h, char* corb, char* corp){
     retangulo *r = malloc(sizeof(retangulo));
     r->i = i;
     r->x = x;
@@ -34,62 +34,62 @@ retangulo criar_retangulo(int i, double x, double y, double w, double h, char* c
     return ((retangulo*)r);
 }
 
-int getIretangulo(retangulo r){
+int getIretangulo(Retangulo r){
     return ((retangulo*)r)->i;
 }
 
-double getXretangulo(retangulo r){
+double getXretangulo(Retangulo r){
     return ((retangulo*)r)->x;
 }
 
-double getYretangulo(retangulo r){
+double getYretangulo(Retangulo r){
     return ((retangulo*)r)->y;
 }
 
-double getWretangulo(retangulo r){
+double getWretangulo(Retangulo r){
     return ((retangulo*)r)->w;
 }
 
-double getHretangulo(retangulo r){
+double getHretangulo(Retangulo r){
     return ((retangulo*)r)->h;
 }
 
-char* getCORBretangulo(retangulo r){
+char* getCORBretangulo(Retangulo r){
     return ((retangulo*)r)->corb;
 }
 
-char* getCORPretangulo(retangulo r){
+char* getCORPretangulo(Retangulo r){
     return ((retangulo*)r)->corp;
 }
 
-void setIretangulo(retangulo r, int i){
+void setIretangulo(Retangulo r, int i){
     ((retangulo*)r)->i = i;
 }
 
-void setXretangulo(retangulo r, double x){
+void setXretangulo(Retangulo r, double x){
     ((retangulo*)r)->x = x;
 }
 
-void setYretangulo(retangulo r, double y){
+void setYretangulo(Retangulo r, double y){
     ((retangulo*)r)->y = y;
 }
 
-void setWretangulo(retangulo r, double w){
+void setWretangulo(Retangulo r, double w){
     ((retangulo*)r)->w = w;
 }
 
-void setHretangulo(retangulo r, double h){
-    ((retangulo*)r)->w = w;
+void setHretangulo(Retangulo r, double h){
+    ((retangulo*)r)->h = h;
 }
 
-void setCORBretangulo(retangulo r, char* corb){
+void setCORBretangulo(Retangulo r, char* corb){
     strcpy(((retangulo*)r)->corb, corb);
 }
 
-void setCORPretangulo(retangulo r, char* corp){
+void setCORPretangulo(Retangulo r, char* corp){
     strcpy(((retangulo*)r)->corp, corp);
 }
 
-double calcula_area_retangulo(retangulo r){
+double calcula_area_retangulo(Retangulo r){
     return (((retangulo*)r)->w * ((retangulo*)r)->h);
 }
