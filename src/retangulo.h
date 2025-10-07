@@ -7,6 +7,10 @@
 
 typedef void* Retangulo;
 
+/*
+    Arquivo .h relacionado a forma de um retangulo, com funcoes de get, set e calculo de area
+*/
+
 /// @brief Cria um novo retangulo com os valores dos parmetros
 /// @param i O valor do identificador do retangulo
 /// @param x O valor da coordenada x da ancora do retangulo

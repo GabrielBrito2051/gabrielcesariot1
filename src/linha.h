@@ -8,6 +8,10 @@
 
 typedef void* Linha;
 
+/*
+    Arquivo .h relacionado a forma de uma linha, com funcoes de get, set e calculo de area
+*/
+
 /// @brief Cria uma linha com os valores dos parametros especificados
 /// @param i O valor do identificador da linha
 /// @param x1 O valor da coordenada x do inicio da linha

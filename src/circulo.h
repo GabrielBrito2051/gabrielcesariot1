@@ -7,6 +7,10 @@
 
 typedef void* Circulo;
 
+/*
+    Arquivo .h relacionado a forma de um circulo, com funcoes de get, set e calculo de area
+*/
+
 /// @brief Cria um circulo com os valores dos parametros
 /// @param i Identificador do circulo
 /// @param x Coordenada horizontal do centro circulo
