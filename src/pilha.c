@@ -6,9 +6,9 @@
 typedef struct ELEMENTO{
     void* forma;
     struct ELEMENTO *prox;
-}elemento;
+}elementopilha;
 
-typedef elemento* pont;
+typedef elementopilha* pont;
 
 typedef struct{
     pont topo;
@@ -25,9 +25,20 @@ int verifica_se_vazia(Pilha p){
     return (((pilha*)p)->topo == NULL) ? 1 : 0;
 }
 
-void push(Pilha p, void* forma){
+int getTAMANHOpilha(Pilha p){
+    pont extra = ((pilha*)p)->topo;
+    int tam = 0;
+    while (extra!=NULL){
+        tam++;
+        extra = extra->prox;
+    }
+
+    return tam;
+}
+
+void pushPilha(Pilha p, Forma forma){
     pilha *var = (pilha*) p;
-    pont novo = malloc(sizeof(elemento));
+    pont novo = malloc(sizeof(elementopilha));
     if(novo == NULL){
         printf("Erro ao alocar memoria para a pilha");
         exit(1);
@@ -37,18 +48,17 @@ void push(Pilha p, void* forma){
     var->topo = novo;
 }
 
-void pop(Pilha p){
+void popPilha(Pilha p){
     if(verifica_se_vazia(p)==1){
         printf("Nao foi possivel dar pop, pilha vazia");
         exit(1);
     }
     pilha *var = (pilha*) p;
-    pont p = var->topo;
+    pont apagar = var->topo;
     var->topo = var->topo->prox;
-    free(p);
+    free(apagar);
 }
 
-void* get_topo_pilha(Pilha p){
-    pilha *var = (pilha*) p;
-    return var->topo->forma;
+Forma get_topo_pilha(Pilha p){
+    return (((pilha*)p)->topo->forma);
 }
