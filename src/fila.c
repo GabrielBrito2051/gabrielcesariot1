@@ -4,6 +4,7 @@
 
 typedef struct ELEMENTO{
     Forma forma;
+    int tipoforma;
     struct ELEMENTO* prox;
 }elementofila;
 

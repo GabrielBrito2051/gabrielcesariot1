@@ -3,7 +3,8 @@
 #include "pilha.h"
 
 typedef struct ELEMENTO{
-    void* forma;
+    Forma forma;
+    int tipoforma;
     struct ELEMENTO *prox;
 }elementopilha;
 

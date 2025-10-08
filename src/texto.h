@@ -2,16 +2,63 @@
 #define texto_h
 
 typedef void* Texto;
+typedef void* Estilo;
+
+/*
+    Arquivo .h relacionado a forma de um texto, com funcoes de get, set e calculo de area
+*/
+
+// FUNCOES DE ESTILO //
+
+/// @brief Cria e retorna o estilo que sera inserido em um texto
+/// @param family Familia da fonte
+/// @param weight Weight da fonte
+/// @param size Tamanho da fonte
+/// @return Retorna um ponteiro para o estilo
+Estilo criar_estilo(char *family, char *weight, char *size);
+
+/// @brief Pega a familia da fonte do texto
+/// @param ts O estilo
+/// @return Retorna a familia da fonte
+char* getFAMILY(Estilo ts);
+
+/// @brief Pega o weight da fonte do texto
+/// @param ts O estilo
+/// @return Retorna o weight da fonte
+char* getWEIGHT(Estilo ts);
+
+/// @brief Pega o tamanho da fonte do texto
+/// @param ts O estilo
+/// @return Retorna o tamanho da fonte
+char* getSIZE(Estilo ts);
+
+/// @brief Define a familia da fonte do texto
+/// @param ts O estilo
+/// @param family A familia da fonte
+void setFAMILY(Estilo ts, char*family);
+
+/// @brief Define o weight da fonte do texto
+/// @param ts O estilo
+/// @param weight O weight da fonte
+void setWEIGHT(Estilo ts, char* weight);
+
+/// @brief Define o tamanho da fonte do texto
+/// @param ts O estilo
+/// @param size O tamanho da fonte
+void setSIZE(Estilo ts, char* size);
+
+// FUNCOES DE TEXTO //
 
 /// @brief Cria um texto com os valores dos parametros especificados
 /// @param i Valor do identificador do texto
 /// @param x Valor da coordenada x da ancora do texto 
 /// @param y Valor da coordenada y da ancora do texto
-/// @param cor Valor hexadecimal da cor do texto
+/// @param corb Valor hexadecimal da cor da borda do texto
+/// @param corp Valor hexaddecimal da cor do preenchimento de texto
 /// @param a Valor que indica a posicao da ancora do texto, sendo i = inicio, m= meio e f = fim
 /// @param txto Array de caracteres que compoe o texto
 /// @return Retorna
-Texto criar_texto(int i, double x, double y, char* cor, char a, char* txto);
+Texto criar_texto(int i, double x, double y, char* corb,char* corp, char a, char* txto);
 
 /// @brief Pega o valor do identificador do texto t
 /// @param t O texto que tera o identificadro lido
@@ -36,7 +83,7 @@ char* getCORtexto(Texto t);
 /// @brief Pega o valor hexadecimal da cor complementar do texto t
 /// @param t O texto que tera a cor complementar lida
 /// @return Retorna um array de caracteres com o valor hexadecimal da cor complementar do texto
-char* getCORCOMPLtexto(Texto t);
+char* getCORPtexto(Texto t);
 
 /// @brief Pega o valor que indica a posicao da ancora do texto
 /// @param t O texto no qual tera a posicao da ancora lida
@@ -71,12 +118,12 @@ void setYtexto(Texto t, double y);
 /// @brief Define o valor hexadecimal da cor do texto t
 /// @param t O texto no qual tera sua cor definida
 /// @param cor O valor hexadecimal da cor do texto
-void setCORtexto(Texto t, char* cor);
+void setCORBtexto(Texto t, char* corb);
 
-/// @brief Calcula e define o valor hexadecimal da cor complementar do texto t
+/// @brief Define o valor hexadecimal da cor complementar do texto t
 /// @param t O texto no qual tera sua cor complementar lida
 /// @param corcompl O valor da cor complementar do texto
-void setCORCOMPLtexto(Texto t, char* corcompl);
+void setCORPtexto(Texto t, char* corp);
 
 /// @brief Define a posicao da ancora do texto t
 /// @param t O texto no qual tera a posicao de sua ancora definida
@@ -92,6 +139,6 @@ void setTXTOtexto(Texto t, char* txto);
 /// @param t O texto que tera sua area calculada
 /// @param tamanho A quantia de caracteres presentes no texto t
 /// @return Retorna a area do texto t
-double calcula_area_texto(Texto t, int tamanho);
+double calcula_area_texto(Texto t);
 
 #endif

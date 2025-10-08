@@ -6,30 +6,89 @@
 typedef struct{
     int i;
     double x, y;
-    char *cor, *corcompl, *txto;
+    char *corb, *corp, *txto;
     char a;
 }texto;
 
-Texto criar_texto(int i, double x, double y, char* cor, char a, char* txto){
+typedef struct{
+    char *family;
+    char *weight;
+    char *size;
+}estilo;
+
+Estilo criar_estilo(char* family, char* weight, char* size){
+    estilo *ts = malloc(sizeof(estilo));
+    ts->family = (char*)malloc(strlen(family)+1);
+    if(ts->family==NULL){
+        printf("Erro ao alocar memoria para a familia");
+        exit(1);
+    }
+    strcpy(ts->family, family);
+
+    ts->weight = (char*)malloc(strlen(weight)+1);
+    if (ts->weight==NULL){
+        printf("Erro ao alocar memoria para o weight");
+        exit(1);
+    }
+    strcpy(ts->weight, weight);
+
+    ts->size = (char*)malloc(strlen(size)+1);
+    if(ts->size==NULL){
+        printf("Erro ao alocr memoria para o tamanho");
+        exit(1);
+    }
+    strcpt(ts->size,size);
+
+    return ((estilo*)ts);
+}
+
+char* getFAMILY(Estilo ts){
+    return ((estilo*)ts)->family;
+}
+
+char* getWEIGHT(Estilo ts){
+    return ((estilo*)ts)->weight;
+}
+
+char* getSIZE (Estilo ts){
+    return((estilo*)ts)->size;
+}
+
+void setFAMILY(Estilo ts, char* family){
+    estilo* var = (estilo*) ts;
+    strcpy(var->family, family);
+}
+
+void setWEIGHT(Estilo ts, char* weight){
+    estilo* var = (estilo*) ts;
+    strcpy(var->weight, weight);
+}
+
+void setSIZE(Estilo ts, char* size){
+    estilo* var = (estilo*) ts;
+    strcpy(var->size, size);
+}
+
+Texto criar_texto(int i, double x, double y, char* corb, char* corp, char a, char* txto){
     texto *t = malloc(sizeof(texto));
     t->i = i;
     t->x = x;
     t->y = y;
     t->a = a;
 
-    t->cor = (char*)malloc(strlen(cor)+1);
-    if(t->cor == NULL){
+    t->corb = (char*)malloc(strlen(corb)+1);
+    if(t->corb == NULL){
         printf("Erro ao alocar memoria para a cor do texto");
         exit(1);
     }
-    strcpy(t->cor, cor);
+    strcpy(t->corb, corb);
 
-    t->corcompl = (char*)malloc(strlen(cor)+1);
-    if(t->corcompl == NULL){
+    t->corp = (char*)malloc(strlen(corp)+1);
+    if(t->corp == NULL){
         printf("Erro ao alocar memoria para a cor complementar do texto");
         exit(1);
     }
-    setCORCOMPLtexto(t);
+    strcpy(t->corp, corp);
 
     return ((texto*)t);
 }
@@ -46,12 +105,12 @@ double getYtexto(Texto t){
     return ((texto*)t)->y;
 }
 
-char* getCORtexto(Texto t){
-    return ((texto*)t)->cor;
+char* getCORBtexto(Texto t){
+    return ((texto*)t)->corb;
 }
 
-char* getCORCOMPLtexto(Texto t){
-    return ((texto*)t)->corcompl;
+char* getCORPtexto(Texto t){
+    return ((texto*)t)->corp;
 }
 
 char getAtexto(Texto t){
@@ -74,19 +133,20 @@ void setYtexto(Texto t, double y){
     ((texto*)t)->y = y;
 }
 
-void setCORtexto(Texto t, char* cor){
-    strcpy(((texto*)t)->cor, cor);
+void setCORBtexto(Texto t, char* corb){
+    strcpy(((texto*)t)->corb, corb);
 }
 
-void setCORCOMPLtexto(Texto t){
-    int r, g, b;
-    int Rcompl, Gcompl, Bcompl;
-    char* p = ((texto*)t)->cor[1];
-    sscanf(p, "%2x%2x%2x", &r, &g, &b);
-    Rcompl = 255 - r;
-    Gcompl = 255 - g;
-    Bcompl = 255 - b;
-    sprintf(((texto*)t)->corcompl, "#%X%X%X", Rcompl, Gcompl, Bcompl);
+void setCORPtexto(Texto t, char* corp){
+    strcpy(((texto*)t)->corp, corp);
+}
+
+void setAtexto(Texto t, char a){
+    ((texto*)t)->a = a;
+}
+
+void setTXTOtexto(Texto t, char* txto){
+    strcpy(((texto*)t)->txto, txto);
 }
 
 double calcula_area_texto(Texto t){
