@@ -67,19 +67,19 @@ void setIlinha(Linha l, int i){
     ((linha*)l)->i =i;
 }
 
-void setX1linha(Linha l, int x1){
+void setX1linha(Linha l, double x1){
     ((linha*)l)->x1 = x1;
 }
 
-void setY1linha(Linha l, int y1){
+void setY1linha(Linha l, double y1){
     ((linha*)l)->y1 = y1;
 }
 
-void setX2linha(Linha l, int x2){
+void setX2linha(Linha l, double x2){
     ((linha*)l)->x2 = x2;
 }
 
-void setY2linha(Linha l, int y2){
+void setY2linha(Linha l, double y2){
     ((linha*)l)->y2 = y2;
 }
 

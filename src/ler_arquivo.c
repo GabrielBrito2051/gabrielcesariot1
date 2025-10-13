@@ -11,7 +11,7 @@ arquivo abre_arquivo_escrita(char* nome){
         printf("Erro ao abrir arquivo %s",nome);
         exit(1);
     }
-    return arq;
+    return ((FILE*)arq);
 }
 
 arquivo abre_arquivo_leitura(char* nome){
@@ -20,16 +20,11 @@ arquivo abre_arquivo_leitura(char* nome){
         printf("Erro ao abrir o arquivo %s",nome);
         exit(1);
     }
-    return arq;
+    return ((FILE*)arq);
 }
 
 char* le_linha(arquivo arq, char* linha){
-    fgets(linha, tamLinha, arq);
-    if(linha==NULL){
-        printf("Erro ao ler uma linha do arquivo");
-        exit(1);
-    }
-    return linha;
+    return fgets(linha, tamLinha, arq);
 }
 
 void fecha_arquivo(arquivo arq){

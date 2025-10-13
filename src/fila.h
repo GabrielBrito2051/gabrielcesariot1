@@ -23,7 +23,7 @@ int getTAMANHOfila(Fila f);
 
 /// @brief Insere um elemento na fila f
 /// @param f A fila na qual sera inserido um elemento
-/// @param forma 
+/// @param forma O ponteiro para a forma que sera inserida
 void pushFila(Fila f, Forma forma);
 
 /// @brief Remove um elemento da fila f

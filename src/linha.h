@@ -64,23 +64,23 @@ void setIlinha(Linha l,int i);
 
 /// @brief Define o valor da coordenada x de inicio da linha l
 /// @param l A linha que tera sua coordenada x de incio definida
-/// @param X1 O valor da coordenada x de inicio da linha
-void setX1linha(Linha l,double X1);
+/// @param x1 O valor da coordenada x de inicio da linha
+void setX1linha(Linha l,double x1);
 
 /// @brief Define o valor da coordenada y de inicio da linha l
 /// @param l A linha que tera sua coordenada y de inicio lida
-/// @param Y1 O valor da coordenada y de incio
-void setY1linha(linha l, double Y1);
+/// @param y1 O valor da coordenada y de incio
+void setY1linha(Linha l, double y1);
 
 /// @brief Define o valor da coordenada x do fim da linha l
 /// @param l A linha que tera sua coordenada x de fim lida
-/// @param X2 O valor da coordenada x do fim da linha
-void setX2linha(Linha l, double X2);
+/// @param x2 O valor da coordenada x do fim da linha
+void setX2linha(Linha l, double x2);
 
 /// @brief Define o valor da coordenada y do fim da linha l
 /// @param l A linha que tera sua coordenada y de fim lida
-/// @param Y2 O valor da coordenada y de fim da linha
-void setY2linha(Linha l, double Y2);
+/// @param y2 O valor da coordenada y de fim da linha
+void setY2linha(Linha l, double y2);
 
 /// @brief Deifne o valor da cor hexadecimal da linha
 /// @param l A linha que tera sua cor definida

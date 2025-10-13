@@ -35,12 +35,6 @@ int getIcarregador(Carregador car){
 Carregador load_carregador(Carregador car, Fila f, int i){
     carregador *castcar = ((carregador*)car);
     f = criar_fila();
-    int tam = getTAMANHOfila(f);
-    node n;
-    if(i>tam){
-        printf("Erro ao inserir as formas no carregador, o numero de formas indicadas e maior que a quantidade de formas no chao");
-        exit(1);
-    }
     for(int j;j<i;j++){
         pushPilha(castcar, get_inicio_fila(f));
         popFila(f);
