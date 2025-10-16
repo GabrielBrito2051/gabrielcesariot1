@@ -44,8 +44,8 @@ void attach_carreador(Disparador disp, Carregador car, char lado){
 
 void shift(Disparador disp, char lado){
     disparador* castdisp = (disparador*) disp;
-    Carregador origem = (lado=="e") ? castdisp->cesq : castdisp->cdir;
-    Carregador destino = (lado=="e") ? castdisp->cdir : castdisp->cesq;
+    Carregador origem = (lado=="d") ? castdisp->cesq : castdisp->cdir;
+    Carregador destino = (lado=="d") ? castdisp->cdir : castdisp->cesq;
 
     if(castdisp->pos_disparo!=NULL){
         if(destino != NULL){
@@ -104,4 +104,17 @@ double getYdisparador(Disparador disp){
 Forma getFormaNaMira(Disparador disp){
     disparador* castdisp = (disparador*)disp;
     return castdisp->pos_disparo;
+}
+
+Carregador desencaixa_carregador(Disparador disp, char lado){
+    disparador* castdisp = (disparador*) disp;
+    Carregador removido = NULL;
+    if(lado=="e"){
+        removido = castdisp->cesq;
+        castdisp->cesq=NULL;
+    }else{
+        removido = castdisp->cdir;
+        castdisp->cdir=NULL;
+    }
+    return removido;
 }

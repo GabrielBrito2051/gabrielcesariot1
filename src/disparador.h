@@ -64,4 +64,10 @@ double getYdisparador(Disparador disp);
 /// @return Retorna um ponteiro para a forma que esta na posicao de disparo
 Forma getFormaNaMira(Disparador disp);
 
+/// @brief Remove um carregador de um disparador
+/// @param disp O disparador que tera o carregador desencaixado
+/// @param lado O lado do disparador que tera o carregador desencaixado
+/// @return Retorna um ponteiro para o carregador desencaixado
+Carregador desencaixa_carregador(Disparador disp, char lado);
+
 #endif
