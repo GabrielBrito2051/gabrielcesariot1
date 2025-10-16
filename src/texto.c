@@ -4,17 +4,18 @@
 #include "texto.h"
 
 typedef struct{
-    int i;
-    double x, y;
-    char *corb, *corp, *txto;
-    char a;
-}texto;
-
-typedef struct{
     char *family;
     char *weight;
     char *size;
 }estilo;
+
+typedef struct{
+    int i;
+    double x, y;
+    char *corb, *corp, *txto;
+    char a;
+    estilo estiloTexto;
+}texto;
 
 Estilo criar_estilo(char* family, char* weight, char* size){
     estilo *ts = malloc(sizeof(estilo));
@@ -39,7 +40,7 @@ Estilo criar_estilo(char* family, char* weight, char* size){
     }
     strcpt(ts->size,size);
 
-    return ((estilo*)ts);
+    return (ts);
 }
 
 char* getFAMILY(Estilo ts){

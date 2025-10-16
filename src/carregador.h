@@ -4,33 +4,38 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "circulo.h"
-#include "retangulo.h"
-#include "linha.h"
-#include "texto.h"
 #include "pilha.h"
 #include "fila.h"
 
+/*
+    Arquivo .h relacionado ao carregador e suas funcoes
+*/
+
 typedef void* Carregador;
 
+/// @brief Compara o id fornecido com o id de um carregador
+/// @param c O id do carregador que sera buscado
+/// @param car O carregador que tera seu id verificado
+/// @return Retorna '1' se o id for o mesmo e' 0' se for diferente
+int compara_car(int c, Carregador car);
+
 /// @brief Cria um novo carregador
+/// @param c O id do carregador que sera criado
 /// @return Retorna um ponteiro para o carregador
-Carregador cria_carregador(int i);
+Carregador cria_carregador(int c);
 
 /// @brief Pega o id do carregador car
 /// @param car O carregador que tera seu id pego
 /// @return Retorna o id do carregador
-int getIcarregador(Carregador car);
-
-/// @brief Carrega o carregador com formas do chao
-/// @param c O carregador que sera carregado
-/// @param f O chao
-/// @param i A quantidade de formas do chao que serao inseridas no carregador
-/// @return Retorna um ponteiro para o carregador carregado
-Carregador load_carregador(Carregador car, Fila f, int i);
+int getIDcarregador(Carregador car);
 
 /// @brief Libera a memoria de um carregador que nao e mais necessario
 /// @param c O carregador que sera liberado
-void free_carregador(Carregador car);
+void free_carregador(Carregador car); 
+
+/// @brief Pega a pilha de formas do carregador
+/// @param car O carregador que tera sua pilha pega
+/// @return Retorna o ponteiro para a pilha de formas do carregador
+Pilha getPILHAcarregador(Carregador car);
 
 #endif

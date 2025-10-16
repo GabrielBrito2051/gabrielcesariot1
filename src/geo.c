@@ -17,6 +17,7 @@ Chao leGeo(char* nomeGeo){
     FILE* geo = abre_arquivo_leitura(nomeGeo);
     char* linhaGeo = malloc(sizeof(char) * tamLinha);
     Chao* chao = criar_fila();
+    Estilo ts = criar_estilo("sans", "n", "12");
     int i;
     double x, x2, y, y2, r, h, w;
     char corb[max_cor], corp[max_cor], cor[max_cor], corcompl[max_cor];
@@ -24,27 +25,29 @@ Chao leGeo(char* nomeGeo){
     char txto[max_text], tipo[3], a[2];
     while(le_linha(geo, linhaGeo)!=NULL){
         sscanf(linhaGeo, "%2s",tipo);
-        if(tipo[0]=="c"){
+        if(tipo[0]=='c'){
             sscanf(linhaGeo, "%2s %d %lf %lf %lf %7s %7s",tipo, &i, &x, &y, &r, corb, corp);
             pushFila(chao, criar_circulo(i, x, y, r, *corb, *corp));
         }
-        else if(tipo[0]=="r"){
+        else if(tipo[0]=='r'){
             sscanf(linhaGeo, "%2s %d %lf %lf %lf %lf %7s %7s", tipo, &i, &x, &y, &w, &h, corb, corp);
             pushFila(chao, criar_retangulo(i, x, y, w, h, corb, corp));
         }
-        else if(tipo[0]=="l"){
+        else if(tipo[0]=='l'){
             sscanf(linhaGeo, "%2s %d %lf %lf %lf %lf %7s", tipo, &i, &x, &y, &x2, &y2, cor);
             pushFila(chao, criar_linha(i, x, y, x2, y2, cor));
         }
-        else if(tipo[0]=="t" && tipo[1]==" "){
+        else if(tipo[0]=='t' && tipo[1]==' '){
             sscanf(linhaGeo, "%2s %d %lf %lf %7s %7s %1s %1023 [^\n] ", tipo, &i, &x, &y, corb, corp, a, txto);
             pushFila(chao, criar_texto(i, x, y, corp, corb, a, txto));
         }
-        else if(tipo[0]=="t" && tipo[1]== "s"){
+        else if(tipo[0]=='t' && tipo[1]== 's'){
             sscanf(linhaGeo,"%2s %255s %1s %255s", tipo, font, weight, size);
             setFAMILY(ts, font);
             setWEIGHT(ts, weight);
             setSIZE(ts, size);
         }
     }
+
+    return chao;
 }

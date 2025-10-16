@@ -1,5 +1,5 @@
-#ifndef qry_h
-#define qry_h
+#ifndef ler_arquivo_h
+#define ler_arquivo_h
 
 #include <stdio.h>
 #include <stdlib.h>

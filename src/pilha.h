@@ -14,7 +14,7 @@ Pilha criar_pilha();
 /// @brief Verifica se a pilha esta vazia
 /// @param p A pilha que sera verificada
 /// @return Retorna '1' se estiver vazia e '0' se posuuir ao menos 1 elemento
-int verifica_se_vazia(Pilha p);
+int verifica_pilha_vazia(Pilha p);
 
 /// @brief Pega o tamanho da pilha
 /// @param p A pilha que tera seu tamanho verificado
@@ -33,5 +33,9 @@ void popPilha(Pilha p);
 /// @param p A pilha que sera lida
 /// @return Retorna um ponteiro para a forma no topo da pilha
 Forma get_topo_pilha(Pilha p);
+
+/// @brief Libera a memoria de uma pilha
+/// @param p A pilha que sera liberada
+void free_pilha(Pilha p);
 
 #endif

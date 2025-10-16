@@ -4,7 +4,6 @@
 
 typedef struct ELEMENTO{
     Forma forma;
-    int tipoforma;
     struct ELEMENTO* prox;
 }elementofila;
 
@@ -13,28 +12,25 @@ typedef elementofila* pont;
 typedef struct{
     pont inicio;
     pont fim;
+    int tamanho;
 }fila;
 
 Fila criar_fila(){
     fila* f = malloc(sizeof(fila));
     f->inicio = NULL;
     f->fim = NULL;
+    f->tamanho = 0;
 
     return f;
 }
 
-int verifica_se_vazia(Fila f){
+int verifica_fila_vazia(Fila f){
     return(((fila*)f)->inicio==NULL) ? 1 : 0;
 }
 
 int getTAMANHOfila(Fila f){
-    pont extra = ((fila*)f)->inicio;
-    int tam = 0;
-    while(extra!=NULL){
-        extra = extra->prox;
-        tam++;
-    }
-    return tam;
+    fila* castfila = (fila*)f;
+    return castfila->tamanho; 
 }
 
 void pushFila(Fila f, Forma forma){
@@ -54,6 +50,7 @@ void pushFila(Fila f, Forma forma){
         var->fim->prox = novo;
     }
     var->fim = novo;
+    var->tamanho++;
 }
 
 void popFila(Fila f){
@@ -64,8 +61,29 @@ void popFila(Fila f){
         var->fim = NULL;
     }
     free(apagar);
+    var->tamanho--;
 }
 
 Forma get_inicio_fila(Fila f){
+    if(verifica_fila_vazia(f)==1){
+        return NULL;
+    }
     return (((fila*)f)->inicio->forma);
+}
+
+Forma buscar_na_fila(Fila f, int (*comparaElemento)(int i, void* elemento),int i){
+    fila* varf = (fila*)f;
+    pont atual = varf->inicio;
+    while(atual != NULL){
+        if(comparaElemento(i, atual->forma)==1){
+            return atual->forma;
+        }
+        atual = atual->prox;
+    }
+    return NULL;
+}
+
+void free_fila(Fila f){
+    fila* var = (fila*) f;
+    free(var);
 }

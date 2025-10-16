@@ -2,48 +2,43 @@
 #include <stdlib.h>
 #include <string.h>
 #include "carregador.h"
-#include "retangulo.h"
-#include "circulo.h"
-#include "linha.h"
-#include "texto.h"
 #include "pilha.h"
-#include "linha.h"
 #include "fila.h"
 
-typedef void* node;
-
 typedef struct{
-    int i;
-    Pilha pontpilha;
+    int c;
+    Pilha formas;
 }carregador;
 
-Carregador cria_carregador(int i){
+int compara_car(int c, Carregador car){
+    carregador* carextra = (carregador*) car;
+    return (carextra->c == c) ? 1 : 0;
+}
+
+Carregador cria_carregador(int c){
     carregador *car = malloc(sizeof(carregador));
     if(car==NULL){
-        printf("Erro ao alocar memoria para o carregador %d", i);
+        printf("Erro ao alocar memoria para o carregador %d", c);
         exit(1);
     }
-    car->pontpilha = criar_pilha();
-    car->i = i;
+
+    car->formas = criar_pilha();
+    car->c = c;
+
     return car;
 }
 
-int getIcarregador(Carregador car){
-    return ((carregador*)car)->i;
-}
-
-Carregador load_carregador(Carregador car, Fila f, int i){
-    carregador *castcar = ((carregador*)car);
-    f = criar_fila();
-    for(int j;j<i;j++){
-        pushPilha(castcar, get_inicio_fila(f));
-        popFila(f);
-    }
-
-    return castcar;
+int getIDcarregador(Carregador car){
+    return ((carregador*)car)->c;
 }
 
 void free_carregador(Carregador car){
-    carregador *castcar = ((carregador*)car);
-    free(castcar);
+    if(verifica_pilha_vazia(((carregador*)car)->formas)==1){
+        carregador *castcar = ((carregador*)car);
+        free(castcar);
+    }
+}
+
+Pilha getPILHAcarregador(Carregador car){
+    return((carregador*)car)->formas;
 }
