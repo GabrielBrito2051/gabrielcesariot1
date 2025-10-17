@@ -5,6 +5,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include "ler_arquivo.h"
+#include "circulo.h"
+#include "retangulo.h"
+#include "linha.h"
+#include "texto.h"
+#include "fila.h"
 
 typedef void* Chao;
 

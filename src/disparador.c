@@ -42,7 +42,7 @@ void attach_carreador(Disparador disp, Carregador car, char lado){
     }
 }
 
-void shift(Disparador disp, char lado){
+int shift(Disparador disp, char lado){
     disparador* castdisp = (disparador*) disp;
     Carregador origem = (lado=="d") ? castdisp->cesq : castdisp->cdir;
     Carregador destino = (lado=="d") ? castdisp->cdir : castdisp->cesq;
@@ -53,7 +53,7 @@ void shift(Disparador disp, char lado){
                 pushPilha(pilha_destino, castdisp->pos_disparo);
         }else{
             printf("O carregador de destino nao existe!");
-            exit(1);
+            return 0;
         }
         castdisp->pos_disparo = NULL;
     }
@@ -63,13 +63,16 @@ void shift(Disparador disp, char lado){
         if(verifica_pilha_vazia(pilha_origem)==0){
             castdisp->pos_disparo = get_topo_pilha(pilha_origem);
             popPilha(pilha_origem);
+            return 1;
         }else{
              printf("Nao ha mais formas no carregador de origem, disparador agora esta vazio!");
             castdisp->pos_disparo=NULL;
+            return 0;
         }
     }else{
-       printf("Nao ha um carregador na posicao de origem, o disparador esta vazio!");
+       printf("Nao ha um carregador no disparador, esta vazio!");
         castdisp->pos_disparo=NULL;
+        return 0;
     }
 }
 
@@ -104,17 +107,4 @@ double getYdisparador(Disparador disp){
 Forma getFormaNaMira(Disparador disp){
     disparador* castdisp = (disparador*)disp;
     return castdisp->pos_disparo;
-}
-
-Carregador desencaixa_carregador(Disparador disp, char lado){
-    disparador* castdisp = (disparador*) disp;
-    Carregador removido = NULL;
-    if(lado=="e"){
-        removido = castdisp->cesq;
-        castdisp->cesq=NULL;
-    }else{
-        removido = castdisp->cdir;
-        castdisp->cdir=NULL;
-    }
-    return removido;
 }

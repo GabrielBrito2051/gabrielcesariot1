@@ -13,9 +13,10 @@
 #define max_font 64
 #define max_text 1024
 
-Chao leGeo(char* nomeGeo){
+Chao leGeo(char* nomeGeo, char* nomeSvg){
     FILE* geo = abre_arquivo_leitura(nomeGeo);
     char* linhaGeo = malloc(sizeof(char) * tamLinha);
+    FILE* svg = abre_arquivo_escrita(nomeSvg);
     Chao* chao = criar_fila();
     Estilo ts = criar_estilo("sans", "n", "12");
     int i;

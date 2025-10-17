@@ -37,7 +37,8 @@ void attach_carregador(Disparador disp, Carregador car, char lado);
 /// @brief Pressiona o botao esquerdo ou direito do disparador
 /// @param disp O disparador que tera o botao apertado
 /// @param lado Qual lado tera o botao apertado
-void shift(Disparador disp, char lado);
+/// @return Retorna 1 se o disparador foi carregado e 0 caso contrario
+int shift(Disparador disp, char lado);
 
 /// @brief Dispara a forma que esta na posicao de disparo
 /// @param disp O disparador que sera disparado
@@ -63,11 +64,5 @@ double getYdisparador(Disparador disp);
 /// @param disp O disparador que tera sua forma na posicao de disparo pega
 /// @return Retorna um ponteiro para a forma que esta na posicao de disparo
 Forma getFormaNaMira(Disparador disp);
-
-/// @brief Remove um carregador de um disparador
-/// @param disp O disparador que tera o carregador desencaixado
-/// @param lado O lado do disparador que tera o carregador desencaixado
-/// @return Retorna um ponteiro para o carregador desencaixado
-Carregador desencaixa_carregador(Disparador disp, char lado);
 
 #endif

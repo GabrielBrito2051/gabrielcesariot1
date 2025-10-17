@@ -5,12 +5,17 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+#include "formas.h"
 
 typedef void* Linha;
 
 /*
     Arquivo .h relacionado a forma de uma linha, com funcoes de get, set e calculo de area
 */
+
+/// @brief Calcula e define o valor hexadecimal da cor complementar da linha l
+/// @param l A linha que tera sua cor lida
+void setCORCOMPLlinha(Linha l);
 
 /// @brief Cria uma linha com os valores dos parametros especificados
 /// @param i O valor do identificador da linha
@@ -87,9 +92,7 @@ void setY2linha(Linha l, double y2);
 /// @param cor O valor hexadecimal da cor da linha
 void setCORlinha(Linha l, char* cor);
 
-/// @brief Calcula e define o valor hexadecimal da cor complementar da linha l
-/// @param l A linha que tera sua cor lida
-void setCORCOMPLlinha(Linha l);
+
 
 /// @brief Calcula e retorna a area da linha l
 /// @param l A linha na qual tera sua area calculada

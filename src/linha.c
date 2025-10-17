@@ -3,12 +3,24 @@
 #include <string.h>
 #include <math.h>
 #include "linha.h"
+#include "formas.h"
 
 typedef struct{
     int i;
     double x1, y1, x2, y2;
     char *cor, *corcompl;
 }linha;
+
+void setCORCOMPLlinha(Linha l){
+    int r, g, b;
+    int Rcompl, Gcompl, Bcompl;
+    char* p = ((linha*)l)->cor[1];
+    sscanf(p, "%2x%2x%2x", &r, &g, &b);
+    Rcompl = 255 - r;
+    Gcompl = 255 - g;
+    Bcompl = 255 - b;
+    sprintf(((linha*)l)->corcompl, "#%X%X%X", Rcompl, Gcompl, Bcompl);
+}
 
 Linha criar_linha(int i, double x1, double y1, double  x2, double y2, char* cor){
     linha *l = malloc(sizeof(linha));
@@ -85,17 +97,6 @@ void setY2linha(Linha l, double y2){
 
 void setCORlinha(Linha l, char* cor){
     strcpy(((linha*)l)->cor, cor);
-}
-
-void setCORCOMPLlinha(Linha l){
-    int r, g, b;
-    int Rcompl, Gcompl, Bcompl;
-    char* p = ((linha*)l)->cor[1];
-    sscanf(p, "%2x%2x%2x", &r, &g, &b);
-    Rcompl = 255 - r;
-    Gcompl = 255 - g;
-    Bcompl = 255 - b;
-    sprintf(((linha*)l)->corcompl, "#%X%X%X", Rcompl, Gcompl, Bcompl);
 }
 
 double calcula_area_linha(Linha l){
