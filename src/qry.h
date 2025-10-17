@@ -17,6 +17,6 @@
 /// @param chao O chao
 /// @param listaDisp A lista de disparadores
 /// @param listaCar A lista de carregadores
-void  leComandoQRY(char*nomeQry, char* nomeSvg, Fila chao, Fila listaDisp, Fila listaCar);
+void  leComandoQRY(char*nomeQry, char* nomeSvg, Fila chao, Fila listaDisp, Fila listaCar, Fila arena);
 
 #endif
