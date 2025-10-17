@@ -25,7 +25,7 @@ Carregador cria_carregador(int c){
     car->formas = criar_pilha();
     car->c = c;
 
-    return car;
+    return ((carregador*)car);
 }
 
 int getIDcarregador(Carregador car){

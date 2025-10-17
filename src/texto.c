@@ -40,7 +40,7 @@ Estilo criar_estilo(char* family, char* weight, char* size){
     }
     strcpt(ts->size,size);
 
-    return (ts);
+    return ((estilo*)ts);
 }
 
 char* getFAMILY(Estilo ts){

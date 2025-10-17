@@ -20,7 +20,7 @@ Disparador criar_disparador(int d, double x, double y){
     disp->cesq = NULL;
     disp->cdir = NULL;
 
-    return disp;
+    return ((disparador*)disp);
 }
 
 int  compara_disp(int d, Disparador DispDaLista){
