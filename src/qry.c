@@ -7,6 +7,7 @@
 #include "carregador.h"
 #include "pilha.h"
 #include "fila.h"
+#include "formas.h"
 #include "circulo.h"
 #include "retangulo.h"
 #include "linha.h"
@@ -14,7 +15,7 @@
 
 #define tamLinha 256
 
-char*  leComandoQRY(char* nomeQry, char* nomeSvg, Fila chao, Fila listaDisp, Fila listaCar, Fila arena){
+void  leComandoQRY(char* nomeQry, char* nomeSvg, Fila chao, Fila listaDisp, Fila listaCar, Fila arena){
     FILE* qry = abre_arquivo_leitura(nomeQry);
     if(qry==NULL){
         printf("Erro ao abrir o arquivo qry");
@@ -45,7 +46,7 @@ char*  leComandoQRY(char* nomeQry, char* nomeSvg, Fila chao, Fila listaDisp, Fil
                     break;
                 }
                 Forma formaMovida = get_inicio_fila(chao);
-                tipo = getTIPOFORMAfila(chao);
+                tipo = getTipoForma(formaMovida);
                 pushPilha(pilhacar, formaMovida);
                 popFila(chao);
             }
@@ -67,10 +68,8 @@ char*  leComandoQRY(char* nomeQry, char* nomeSvg, Fila chao, Fila listaDisp, Fil
                 pushFila(listaCar, direito_procurado);
             }
 
-            attach_carregador(procurado, esquerdo_procurado, "e");
-            attach_carregador(procurado, direito_procurado, "d");
-            removeFilaBuscando(listaCar, esquerdo_procurado);
-            removeFilaBuscando(listaCar, direito_procurado);
+            attach_carregador(procurado, esquerdo_procurado, 'e');
+            attach_carregador(procurado, direito_procurado, 'd');
         }
 
         else if(strcmp(comando, "shft")==0){
@@ -86,20 +85,18 @@ char*  leComandoQRY(char* nomeQry, char* nomeSvg, Fila chao, Fila listaDisp, Fil
         }
 
         else if(strcmp(comando, "dsp")==0){
-            sscanf(linhaQry,"%*s %d %lf %lf %c",&d, &dx, &dy, svg);
+            sscanf(linhaQry,"%*s %d %lf %lf %c",&d, &dx, &dy, &svg);
             Disparador procurado = buscar_na_fila(listaDisp, compara_disp, d);
             Forma disparada = disparar_forma(procurado);
             if(disparada!=NULL){
                 double xdisp, ydisp, novox, novoy;
                 xdisp = getXdisparador(procurado);
                 ydisp = getYdisparador(procurado);
-                novox = xdisp + dx;
-                novoy = ydisp + dy;
             }
         }
 
         else if(strcmp(comando, "rjd")==0){
-            double xdisp, ydisp, novox, novoy;
+            double xdisp, ydisp;
             sscanf(linhaQry,"%*s %d %c %lf %lf %lf %lf",&d, &lado, &dx, &dy, &ix, &iy);
             Disparador procurado = buscar_na_fila(listaDisp, compara_disp, d);
             shift(procurado, lado);
@@ -108,8 +105,7 @@ char*  leComandoQRY(char* nomeQry, char* nomeSvg, Fila chao, Fila listaDisp, Fil
             ydisp = getYdisparador(procurado);
             do{
                 disparar_forma(procurado);
-                novox = xdisp + dx+i*ix;
-                novoy = ydisp +dy+i*iy;
+                //adicionar 'i' as coordenadas da forma disparada
             }while(shift(procurado, lado)!=0);
 
         }

@@ -27,24 +27,24 @@ void getSegmentoLinha(Forma f, double* x1, double*y1, double *x2, double* y2){
     }else{
         double xt = getXtexto(f);
         double yt = getYtexto(f);
-        char ancora = getAncoraTexto(f);
-        const char* conteudo = getConteudoTexto(f);
+        char ancora = getAtexto(f);
+        const char* conteudo = getTXTOtexto(f);
         int tamanho = strlen(conteudo);
 
         *y1 = yt;
         *y2 = yt;
 
-        if(ancora == "i"){
+        if(ancora == 'i'){
             *x1 = xt;
             *x2 = xt + 10.0 * tamanho;
         }
         
-        else if(ancora == "f"){
+        else if(ancora == 'f'){
             *x1 = xt - 10.0 * tamanho;
             *x2 = xt;
         }
 
-        else if(ancora == "m"){
+        else if(ancora == 'm'){
             *x1 = xt - 5*tamanho;
             *x2 = xt + 5*tamanho;
         }

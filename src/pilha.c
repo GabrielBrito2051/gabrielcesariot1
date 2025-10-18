@@ -54,7 +54,7 @@ void popPilha(Pilha p){
 }
 
 Forma get_topo_pilha(Pilha p){
-    if(verifica_pilha_vazia==1){
+    if(verifica_pilha_vazia(p)==1){
         return NULL;
     }
     return (((pilha*)p)->topo->forma);

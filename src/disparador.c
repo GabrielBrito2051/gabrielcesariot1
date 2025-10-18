@@ -35,7 +35,7 @@ void free_disp(Disparador disp){
 
 void attach_carreador(Disparador disp, Carregador car, char lado){
     disparador* castdisp = (disparador*) disp;
-    if (lado == "e"){
+    if (lado == 'e'){
         castdisp->cesq = car;
     }else{
         castdisp->cdir = car;
@@ -44,8 +44,8 @@ void attach_carreador(Disparador disp, Carregador car, char lado){
 
 int shift(Disparador disp, char lado){
     disparador* castdisp = (disparador*) disp;
-    Carregador origem = (lado=="d") ? castdisp->cesq : castdisp->cdir;
-    Carregador destino = (lado=="d") ? castdisp->cdir : castdisp->cesq;
+    Carregador origem = (lado=='d') ? castdisp->cesq : castdisp->cdir;
+    Carregador destino = (lado=='d') ? castdisp->cdir : castdisp->cesq;
 
     if(castdisp->pos_disparo!=NULL){
         if(destino != NULL){
@@ -100,7 +100,7 @@ double getXdisparador(Disparador disp){
 }
 
 double getYdisparador(Disparador disp){
-    disparador* castdisp = (Disparador*) disp;
+    disparador* castdisp = (disparador*) disp;
     return castdisp->y;
 }
 

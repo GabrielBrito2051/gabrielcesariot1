@@ -7,7 +7,7 @@
 #include "texto.h"
 
 void abrirSVG(FILE** svg, char* nome){
-    *svg = fopen(svg, "w");
+    *svg = fopen(nome, "w");
     if(*svg == NULL){
         printf("Erro ao alocar memoria para o svg");
         exit(1);
@@ -19,7 +19,7 @@ void startSVG(FILE* svg){
 }
 
 void insere_circulo_svg(FILE* svg, Circulo c){
-    fprintf(svg,"<circle id=\"%d\" style=\"fill:%s;fill-opacity:0.5;stroke:%s\" r=\"%lf\" cy=\"%lf\" cx=\"%lf\" />\n", getIcirculo(c), getCORPcirculo(c), getCORBcirculo(c), getRcirculo(c), getYCirculo(c), getXCirculo(c));
+    fprintf(svg,"<circle id=\"%d\" style=\"fill:%s;fill-opacity:0.5;stroke:%s\" r=\"%lf\" cy=\"%lf\" cx=\"%lf\" />\n", getIcirculo(c), getCORPcirculo(c), getCORBcirculo(c), getRcirculo(c), getYcirculo(c), getXcirculo(c));
     }
 
 void insere_retangulo_svg(FILE *svg, Retangulo r){
@@ -31,7 +31,7 @@ void insere_linha_svg(FILE* svg, Linha l){
 }
 
 void insere_texto_svg(FILE* svg, Texto t, Estilo ts){
-    fprintf(svg, "<text id=\"%d\" style=\"font-size:%s;line-height:%s;fill:%s\" font-size=\"5\" y=\"%lf\" x=\"%lf\"> %s </text>\n", getItexto(t), getSIZE(ts), getFAMILY(ts), getYTexto(t), getXTexto(t), getTXTOtexto(t));
+    fprintf(svg, "<text id=\"%d\" style=\"font-size:%s;line-height:%s;fill:%s\" font-size=\"5\" y=\"%lf\" x=\"%lf\"> %s </text>\n", getItexto(t), getSIZE(ts),getWEIGHT(ts), getFAMILY(ts), getYtexto(t), getXtexto(t), getTXTOtexto(t));
 }
 
 void fechasvg(FILE* svg){

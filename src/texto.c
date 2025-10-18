@@ -38,7 +38,7 @@ Estilo criar_estilo(char* family, char* weight, char* size){
         printf("Erro ao alocr memoria para o tamanho");
         exit(1);
     }
-    strcpt(ts->size,size);
+    strcpy(ts->size,size);
 
     return ((estilo*)ts);
 }
@@ -90,6 +90,12 @@ Texto criar_texto(int i, double x, double y, char* corb, char* corp, char a, cha
         exit(1);
     }
     strcpy(t->corp, corp);
+
+    t->txto = (char*)malloc(strlen(txto)+1);
+    if(t->txto==NULL){
+        printf("Erro ao alocar memoria para o texto do texto");
+        exit(1);
+    }
 
     return ((texto*)t);
 }

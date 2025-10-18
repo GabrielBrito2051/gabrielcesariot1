@@ -74,7 +74,7 @@ void setRcirculo(Circulo c, double r);
 /// @brief Define o valor da cor da borda do circulo c
 /// @param c O circulo que tera sua cor de borda definida
 /// @param corb O valor hexadecimal da cor da borda do circulo c
-void setCORBcirculo(Circulo c, char corb);
+void setCORBcirculo(Circulo c, char* corb);
 
 /// @brief Define o valor da cor do preenchimento do circulo c
 /// @param c O circulo que tera sua cor de preenchimento definida

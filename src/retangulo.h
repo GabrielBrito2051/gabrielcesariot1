@@ -95,6 +95,6 @@ void setCORPretangulo(Retangulo r, char* corp);
 /// @brief Calcula e retorna a area do retangulo r
 /// @param r O retangulo que tera a area calculada
 /// @return O valor da area do retangulo r
-double calcula_area_retangulo(retangulo r);
+double calcula_area_retangulo(Retangulo r);
 
 #endif

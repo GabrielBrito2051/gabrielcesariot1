@@ -54,21 +54,21 @@ void calculaBoxTexto(Texto t, double* x, double* y, double* w, double* h){
     double xt = getXtexto(t);
     double yt = getYtexto(t);
     char ancora = getAtexto(t);
-    char txto = getTXTOtexto(t);
+    char* txto = getTXTOtexto(t);
     int tamanho = strlen(txto);
     double x1, x2;
 
-    if(ancora=="i"){
+    if(ancora=='i'){
         x1 = xt;
         x2 = xt + 10*tamanho;
     }
 
-    else if(ancora == "m"){
+    else if(ancora == 'm'){
         x1 = xt - 5 * tamanho;
         x2 = xt + 5 * tamanho;
     }
 
-    else if(ancora == "f"){
+    else if(ancora == 'f'){
         x1 = xt - 10 * tamanho;
         x2 = xt;
     }
@@ -319,8 +319,11 @@ int verificaColisaoFormas(Forma f1, Forma f2){
     
     else if(tipo1 == tipo_linha && tipo2 == tipo_retangulo){
         return colisaoRL(f2, f1);
+    }else{
+        printf("Forma nao identificada!");
+        return 0;
     }
-
+    
 }
 
 int verifica_sobreposicao(Forma f1, Forma f2){

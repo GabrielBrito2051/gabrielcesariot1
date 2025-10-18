@@ -92,15 +92,9 @@ void setY2linha(Linha l, double y2);
 /// @param cor O valor hexadecimal da cor da linha
 void setCORlinha(Linha l, char* cor);
 
-
-
 /// @brief Calcula e retorna a area da linha l
 /// @param l A linha na qual tera sua area calculada
-/// @param x1 O valor da coordenada x do inicio da linha l
-/// @param y1 O valor da coordenada y do inicio da linha l
-/// @param x2 O valor da coordenada x do fim da linha l
-/// @param y2 O valor da coordenada y do fim da linha l
 /// @return Retorna a area da linha
-double calcula_area_linha(Linha l, double x1, double y1, double x2, double y2);
+double calcula_area_linha(Linha l);
 
 #endif

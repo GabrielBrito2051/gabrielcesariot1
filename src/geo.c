@@ -16,19 +16,18 @@
 Chao leGeo(char* nomeGeo, char* nomeSvg){
     FILE* geo = abre_arquivo_leitura(nomeGeo);
     char* linhaGeo = malloc(sizeof(char) * tamLinha);
-    FILE* svg = abre_arquivo_escrita(nomeSvg);
     Chao* chao = criar_fila();
     Estilo ts = criar_estilo("sans", "n", "12");
     int i;
     double x, x2, y, y2, r, h, w;
-    char corb[max_cor], corp[max_cor], cor[max_cor], corcompl[max_cor];
+    char corb[max_cor], corp[max_cor], cor[max_cor];
     char font[max_font], size[max_font], weight[max_font];
-    char txto[max_text], tipo[3], a[2];
+    char txto[max_text], tipo[3], a;
     while(le_linha(geo, linhaGeo)!=NULL){
         sscanf(linhaGeo, "%2s",tipo);
         if(tipo[0]=='c'){
             sscanf(linhaGeo, "%2s %d %lf %lf %lf %7s %7s",tipo, &i, &x, &y, &r, corb, corp);
-            pushFila(chao, criar_circulo(i, x, y, r, *corb, *corp));
+            pushFila(chao, criar_circulo(i, x, y, r, corb, corp));
         }
         else if(tipo[0]=='r'){
             sscanf(linhaGeo, "%2s %d %lf %lf %lf %lf %7s %7s", tipo, &i, &x, &y, &w, &h, corb, corp);
@@ -39,7 +38,7 @@ Chao leGeo(char* nomeGeo, char* nomeSvg){
             pushFila(chao, criar_linha(i, x, y, x2, y2, cor));
         }
         else if(tipo[0]=='t' && tipo[1]==' '){
-            sscanf(linhaGeo, "%2s %d %lf %lf %7s %7s %1s %1023 [^\n] ", tipo, &i, &x, &y, corb, corp, a, txto);
+            sscanf(linhaGeo, "%2s %d %lf %lf %7s %7s %c %1023[^\n] ", tipo, &i, &x, &y, corb, corp, &a, txto);
             pushFila(chao, criar_texto(i, x, y, corp, corb, a, txto));
         }
         else if(tipo[0]=='t' && tipo[1]== 's'){

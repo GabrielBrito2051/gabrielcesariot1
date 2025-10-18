@@ -11,6 +11,7 @@ typedef enum{
 }tipoforma;
 
 typedef struct  pacote* Pacote;
+typedef void* Forma;
 
 /// @brief Cria um 'pacote' contendo a forma e o seu tipo
 /// @return Retorna o pacote criado

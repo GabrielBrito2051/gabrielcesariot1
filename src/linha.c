@@ -14,8 +14,9 @@ typedef struct{
 void setCORCOMPLlinha(Linha l){
     int r, g, b;
     int Rcompl, Gcompl, Bcompl;
-    char* p = ((linha*)l)->cor[1];
-    sscanf(p, "%2x%2x%2x", &r, &g, &b);
+    char extra[2];
+    char* p = ((linha*)l)->cor;
+    sscanf(p, "%1s%2x%2x%2x",extra, &r, &g, &b);
     Rcompl = 255 - r;
     Gcompl = 255 - g;
     Bcompl = 255 - b;
