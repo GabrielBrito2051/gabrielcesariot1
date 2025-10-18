@@ -26,6 +26,14 @@ tipoforma getTipoForma(Forma forma);
 /// @return Retorna a forma do pacote
 Forma getFORMApacote(Pacote pacote);
 
+/// @brief Obtem as coordenadas do segmento de linha para as formas linha e texto
+/// @param f A forma
+/// @param x1 Ponteiro para armazenar a coordenada x1 da forma
+/// @param y1 Ponteiro para armazenar a coordenada y1 da forma
+/// @param x2 Ponteiro para armazenar a coordenada x2 da forma
+/// @param y2 Ponteiro para armazenar a coordenada y2 da forma
+void getSegmentoLinha(Forma f, double* x1, double*y1, double *x2, double* y2);
+
 /// @brief Libera memoria do pacote
 /// @param pac O pacote que sera liberado
 void freePACOTE(Pacote pac);

@@ -72,10 +72,72 @@ double getWbox(BoundingBox bb);
 /// @param bb A bounding box
 double getHbox(BoundingBox bb);
 
+/// @brief Calcula a distancia entre dois pontos
+/// @param x1 Coordenada x do primeiro ponto
+/// @param x2 Coordenada x do segundo ponto
+/// @param y1 Coordenada y do primeiro ponto
+/// @param y2 Coordenada y do segundo ponto
+/// @return Retorna a distancia entre os dois pontos
+double distEntrePontos(double x1, double x2, double y1, double y2);
+
+/// @brief Cria e retorna a bounding box para qualquer forma generica
+/// @param f A forma que tera sua box criada
+/// @return Retornao ponteiro para a box criada
+BoundingBox getBOXforma(Forma f);
+
+/// @brief Verifica se ha sobreposicao entre dois circulos
+/// @param c1 O primeiro circulo
+/// @param c2 O segundo circulo
+/// @return Retorna 1 se ha a sobreposicao e 0 caso contrario
+int colisaoCC(Circulo c1, Circulo c2);
+
+/// @brief Funcao para "prender" um calor entre um minimo e um maximo
+/// @param valor O valor que se deseja prender
+/// @param min O valor minimo
+/// @param max O valor maximo
+/// @return Retorna um valor entre o minimo e maximo (inclusos)
+double clamp(double valor, double min, double max);
+
+/// @brief Verifica se ha sobreposicao entre um circulo e um retangulo
+/// @param c O circulo
+/// @param r O retuangulo
+/// @return  Retorna 1 se ha a sobreposicao e 0 caso contrario
+int colisaoCR(Circulo c, Retangulo r);
+
+/// @brief Verifica se existe sobreposicao entre um circulo e uma linha
+/// @param c O circulo
+/// @param l A linha
+/// @return  Retorna 1 se ha a sobreposicao e 0 caso contrario
+int colisaoCL(Circulo c, Linha l);
+
+/// @brief Verifica se ha sobreposicao entre um retangulo e uma linha
+/// @param r O retangulo
+/// @param l A linha
+/// @return  Retorna 1 se ha a sobreposicao e 0 caso contrario
+int colisaoRL(Retangulo r, Linha l);
+
+/// @brief Verifica se ha colisao entre duas linhas(textos inclusos)
+/// @param l1 A primeira linha
+/// @param l2 a segunda linha
+/// @return Retorna 1 se ha sobreposicao e 0 caso contrario
+int colisaoLL(Linha l1, Linha l2);
+
 /// @brief Compara se ha colisao entre duas bounding boxes
 /// @param aa A primeira bounding box
 /// @param bb A segunda bounding box
 /// @return Retorna 1 se ha a colisao, e 0 caso contrario
 int ColisaoDeBoxes(BoundingBox aa, BoundingBox bb);
+
+/// @brief Verifica a sobreposicao das formas caso suas bounding boxes estejam sobrepostas
+/// @param f1 A primeira forma
+/// @param f2 A segunda forma
+/// @return Retorna 1 se houver a sobreposicao e 0 caso contrario
+int verificaColisaoFormas(Forma f1, Forma f2);
+
+/// @brief Funcao que engloba as funcoes de verificar a colisao de boxes e colisao das formas em si
+/// @param f1 A primeira forma
+/// @param f2 A segunda forma
+/// @return Retorna 1 se houver a sobreposicao e 0 caso contrario
+int verifica_sobreposicao(Forma f1, Forma f2);
 
 #endif
