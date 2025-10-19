@@ -3,6 +3,7 @@
 #include <string.h>
 #include <math.h>
 #include "sobreposicao.h"
+#include "formas.h"
 #include "retangulo.h"
 #include "circulo.h"
 #include "linha.h"

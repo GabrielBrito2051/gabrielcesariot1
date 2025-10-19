@@ -18,9 +18,9 @@ typedef void* Forma;
 Pacote criarPacote();
 
 /// @brief Pega o tipo de uma da forma no pacote
-/// @param forma A forma generica que tera seu tipo pego
+/// @param Pacote O pacote que tera seu tipo pego
 /// @return Retorna o tipo da forma
-tipoforma getTipoForma(Forma forma);
+tipoforma getTipoForma(Pacote pac);
 
 /// @brief Pega a forma contida no pacote
 /// @param pacote O pacote que sera lido
@@ -34,6 +34,39 @@ Forma getFORMApacote(Pacote pacote);
 /// @param x2 Ponteiro para armazenar a coordenada x2 da forma
 /// @param y2 Ponteiro para armazenar a coordenada y2 da forma
 void getSegmentoLinha(Forma f, double* x1, double*y1, double *x2, double* y2);
+
+/// @brief Pega o id de uma forma de acordo com seu tipo
+/// @param f A forma
+/// @param tipo Seu tipo
+/// @return Retorna o id da forma
+int getIDforma(Forma f, tipoforma tipo);
+
+/// @brief Define o tipo da forma dentro do pacote pac
+/// @param pac O pacote da forma
+/// @param tipo O tipo da forma
+void setTipoForma(Pacote p, char tipo);
+
+/// @brief Insere um forma dentro de um pacote
+/// @param pac O pacote
+/// @param forma A forma que sera inserida no pacote
+void setFormaPacote(Pacote pac, Forma forma);
+
+/// @brief Calcula a area de uma forma dependendo de seu tipo
+/// @param f A forma
+/// @param tipo Seu tipo
+/// @return Retorna o valor da area da forma
+double calculaAreaForma(Forma f, tipoforma tipo);
+
+/// @brief Faz a clonagem de um forma
+/// @param f A forma que sera clonada
+/// @param tipo O tipo da forma
+/// @param nformas Valor passado por referencia que indica a quantidade total de formas no chao inicial
+Pacote clonarForma(Forma f, tipoforma tipo, int* nformas);
+
+/// @brief Troca as cores de duas formas
+/// @param f1 A primeira forma
+/// @param f2 A segunda forma
+void trocaCor(Forma f1, Forma f2);
 
 /// @brief Libera memoria do pacote
 /// @param pac O pacote que sera liberado

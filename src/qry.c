@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include "qry.h"
+#include "sobreposicao.h"
 #include "ler_arquivo.h"
 #include "disparador.h"
 #include "carregador.h"
@@ -15,10 +16,15 @@
 
 #define tamLinha 256
 
-void  leComandoQRY(char* nomeQry, char* nomeSvg, Fila chao, Fila listaDisp, Fila listaCar, Fila arena){
+void  leComandoQRY(char* nomeQry,char* nomeTxt, char* nomeSvg, Fila chao, Fila listaDisp, Fila listaCar, Fila arena, double* total, int* nformas){
     FILE* qry = abre_arquivo_leitura(nomeQry);
     if(qry==NULL){
         printf("Erro ao abrir o arquivo qry");
+        exit(1);
+    }
+    FILE* txt = abre_arquivo_escrita(nomeTxt);
+    if(txt==NULL){
+        printf("Erro ao abrir o arquivo txt");
         exit(1);
     }
     char* linhaQry = malloc(sizeof(char)*tamLinha);
@@ -92,6 +98,31 @@ void  leComandoQRY(char* nomeQry, char* nomeSvg, Fila chao, Fila listaDisp, Fila
                 double xdisp, ydisp, novox, novoy;
                 xdisp = getXdisparador(procurado);
                 ydisp = getYdisparador(procurado);
+                tipo = getTipoForma(disparada);
+                if(tipo==tipo_circulo){
+                    setXcirculo(disparada, xdisp+dx);
+                    setYcirculo(disparada, ydisp+dy);
+                }
+
+                else if(tipo==tipo_retangulo){
+                    setXretangulo(disparada,xdisp+dx);
+                    setYretangulo(disparada,ydisp+dy);
+                }
+
+                else if(tipo==tipo_linha){
+                    double dxl, dyl;
+                    dxl = getX2linha(disparada) - getX1linha(disparada);
+                    dyl = getY2linha(disparada) - getY1linha(disparada);
+                    setX1linha(disparada, xdisp+dx);
+                    setX2linha(disparada,ydisp+dy);
+                    setY1linha(disparada, xdisp + dxl+dx);
+                    setY2linha(disparada, ydisp+dyl+dy); 
+                }
+
+                else if(tipo==tipo_texto){
+                    setXtexto(disparada, xdisp+dx);
+                    setytexto(disparada, ydisp+dy);
+                }
             }
         }
 
@@ -103,15 +134,107 @@ void  leComandoQRY(char* nomeQry, char* nomeSvg, Fila chao, Fila listaDisp, Fila
             int i = 0;
             xdisp = getXdisparador(procurado);
             ydisp = getYdisparador(procurado);
+            Forma formadisparada;
             do{
-                disparar_forma(procurado);
-                //adicionar 'i' as coordenadas da forma disparada
-            }while(shift(procurado, lado)!=0);
+                formadisparada = disparar_forma(procurado);
+                tipo = getTipoForma(formadisparada);
+                if(tipo==tipo_circulo){
+                    setXcirculo(formadisparada, xdisp+dx+i*ix);
+                    setYcirculo(formadisparada, ydisp+dy + i*iy);
+                }
 
+                else if(tipo==tipo_retangulo){
+                    setXretangulo(formadisparada,xdisp +dx + i*ix);
+                    setYretangulo(formadisparada, ydisp +dy+i*iy);
+                }
+
+                else if(tipo==tipo_linha){
+                    double dxl, dyl;
+                    dxl = getX2linha(formadisparada) - getX1linha(formadisparada);
+                    dyl = getY2linha(formadisparada) - getY1linha(formadisparada);
+                    setX1linha(formadisparada, xdisp+dx+i*ix);
+                    setX2linha(formadisparada,ydisp+dy+i*iy);
+                    setY1linha(formadisparada, (xdisp + dxl+dx) + i*ix);
+                    setY2linha(formadisparada, (ydisp+dyl+dy)+i*iy); 
+                }
+
+                else if(tipo==tipo_texto){
+                    setXtexto(formadisparada,xdisp+dx+i*ix);
+                    setYtexto(formadisparada,ydisp+dx+i*ix);
+                }
+                i++;
+            }while(shift(procurado, lado)!=0);
         }
 
         else if(strcmp(comando, "calc")==0){
-
+            double rodada = 0;
+            while(getTAMANHOfila>=2){
+                Pacote pacote1 = get_inicio_fila(arena);
+                popFila(arena);
+                Pacote pacote2 = get_inicio_fila(arena);
+                popfila(arena);
+                Forma forma_i = getFORMApacote(pacote1), forma_j = getFORMApacote(pacote2);
+                if(verifica_sobreposicao(forma_i,forma_j)==1){
+                    Fila formasDestruidas = criar_fila();
+                    tipoforma tipo_i, tipo_j, id, jd;
+                    double area_i, area_j;
+                    tipo_i = getTipoForma(pacote1);
+                    tipo_j = getTipoForma(pacote2);
+                    area_i = calculaAreaForma(forma_i, tipo_i);
+                    area_j = calculaAreaForma(forma_j,tipo_j);
+                    id = getIDforma(forma_i, tipo_i);
+                    jd = getIDforma(forma_j, tipo_j);
+                    fprintf(txt,"SOBREPOSICAO: Houve sobreposicao entre as formas %d e %d\n",id, jd);
+                    if(area_i<area_j){
+                        rodada += area_i;
+                        fprintf(txt,"RESULTADO: Forma %d esmagada. Nova pontuacao: %2lf\n",id, rodada);
+                        Pacote pac = criarPacote();
+                        setTipoForma(pac, tipo_i);
+                        setFormaPacote(pac, forma_i);
+                        pushFila(formasDestruidas, pac);
+                        Pacote pac2 = criarPacote();
+                        setTipoForma(pac2, tipo_j);
+                        setFormaPacote(pac2, forma_j);
+                        pushFila(chao, pac2);
+                    }else{
+                        tipoforma tipo_clone;
+                        fprintf(txt,"RESULTADO: Troca de cores e clonagem da forma %d\n",id);
+                        trocaCor(forma_i,forma_j);
+                        Forma clone = clonarForma(forma_i, tipo_i, &nformas);
+                        tipo_clone = tipo_i;
+                        Pacote pac = criarPacote();
+                        setTipoForma(pac, tipo_i);
+                        setFormaPacote(pac,forma_i);
+                        pushFila(chao,pac);
+                        Pacote pac2 = criarPacote();
+                        setTipoForma(pac2, tipo_j);
+                        setFormaPacote(pac2, forma_j);
+                        pushFila(chao, pac2);
+                        Pacote pac3 = criarPacote();
+                        setTipoForma(pac3, tipo_clone);
+                        setFormaPacote(pac2, clone);
+                        pushFila(chao, pac3);
+                    }
+                }else{
+                    tipoforma tipo_i = getTipoForma(pacote1), tipo_j = getTipoForma(pacote2);
+                    int id = getIDforma(forma_i, tipo_i), jd = getIDforma(forma_j, tipo_j);
+                    fprintf(txt,"SEM SOBREPOSICAO: Formas %d e %d voltam para o chao\n",id , jd);
+                    pushFila(chao, pacote1);
+                    pushFila(chao, pacote2);
+                }
+            }
+            if(getTAMANHOfila(arena)==1){
+                Pacote pac = get_inicio_fila(arena);
+                popFila(arena);
+                Forma sozinha = getFORMApacote(pac);
+                tipoforma tipos = getTipoForma(pac);
+                int ids = getIDforma(sozinha,tipos );
+                fprintf(txt,"A forma %d era a ultima da arena, voltou para o chao sem ser comparada\n",ids);
+                pushFila(chao, pac);
+            }
+            fprintf(txt,"----------- FIM DA RODADA -----------\n");
+            fprintf(txt,"Pontuacao da Rodada: %2lf\n",rodada);
+            fprintf(txt,"Pontuacao Total: %2lf\n\n",*total);
         }
     }
     
