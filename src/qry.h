@@ -3,10 +3,20 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
+#include "qry.h"
+#include "sobreposicao.h"
 #include "ler_arquivo.h"
 #include "disparador.h"
 #include "carregador.h"
+#include "pilha.h"
 #include "fila.h"
+#include "formas.h"
+#include "circulo.h"
+#include "retangulo.h"
+#include "linha.h"
+#include "texto.h"
+#include "txt.h"
 
 /*
     Arquivo relacionado a leitura e processamento do arquivo qry
@@ -21,6 +31,6 @@
 /// @param listaCar A lista de carregadores
 /// @param arena A arena
 /// @param total Ponteiro para a variavel que guarda a pontuacao total do jogo
-void  leComandoQRY(char*nomeQry,char* nomeTxt, char* nomeSvg, Fila chao, Fila listaDisp, Fila listaCar, Fila arena, double* total, int* nformas);
+void  leComandoQRY(FILE* qry,FILE* txt, FILE* svgQry, Fila chao, Fila listaDisp, Fila listaCar, Fila arena, double* total, int* nformas);
 
 #endif

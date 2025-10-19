@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef void* arquivo;
+typedef FILE* arquivo;
 
 /*
     Arquivo .h associado a funcoes de arquivos, como ler, fechar e abrir

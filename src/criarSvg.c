@@ -6,14 +6,6 @@
 #include "linha.h"
 #include "texto.h"
 
-void abrirSVG(FILE** svg, char* nome){
-    *svg = fopen(nome, "w");
-    if(*svg == NULL){
-        printf("Erro ao alocar memoria para o svg");
-        exit(1);
-    }
-}
-
 void startSVG(FILE* svg){
     fprintf(svg,"<svg xmlns:svg=\"http://www.w3.org/2000/svg\" xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\">\n");
 }

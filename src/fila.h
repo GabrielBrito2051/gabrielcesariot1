@@ -42,6 +42,11 @@ Forma get_inicio_fila(Fila f);
 /// @return Retorna a forma que possui o id procurado
 Forma buscar_na_fila(Fila f, int (*comparaElemento)(int i,  void* elemento),int i);
 
+/// @brief Remove um item especifico da fila
+/// @param f A fila
+/// @param forma O item que sera removido
+void removeDaFila(Fila f, Forma forma);
+
 /// @brief Libera a memorioa de uma fila
 /// @param f A fila que sera liberada
 void free_fila(Fila f);

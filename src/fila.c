@@ -83,6 +83,33 @@ Forma buscar_na_fila(Fila f, int (*comparaElemento)(int i, void* elemento),int i
     return NULL;
 }
 
+void removeDaFila(Fila f, Forma forma){
+    fila* var = (fila*)f;
+    pont atual = var->inicio;
+    pont anterior = NULL;
+
+
+    while (atual != NULL && atual->forma != forma) {
+        anterior = atual;
+        atual = atual->prox;
+    }
+    if (atual == NULL) {
+        printf("O elemento nao foi encontrado");
+        return;
+    }
+
+    if (anterior == NULL) { 
+        var->inicio = atual->prox;
+    } 
+    else {
+        anterior->prox = atual->prox;
+    }
+    if (atual == var->fim) {
+        var->fim = anterior;
+    }
+    free(atual);
+}
+
 void free_fila(Fila f){
     fila* var = (fila*) f;
     free(var);

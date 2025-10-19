@@ -107,7 +107,7 @@ double calculaAreaForma(Forma f, tipoforma tipo){
 Pacote clonarForma(Forma f, tipoforma tipo, int* nformas){
     int id = *nformas +1;
     double x, y;
-    char* corb, corp;
+    char* corb, *corp;
     Forma clone;
     if(tipo==tipo_circulo){
         x = getXcirculo(f);

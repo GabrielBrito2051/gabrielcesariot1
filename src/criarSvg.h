@@ -15,14 +15,9 @@ typedef void* Forma;
     Arquivo que gerencia a criacao do arquivo svg
 */
 
-/// @brief Cria o arquivo de saida (.svg)
-/// @param svg Ponteiro duplo para o endereco do arquivo
-/// @param nome Ponteiro com o nome do arquivo svg
-void abrirSVG(FILE **svg, char *nome);
-
 /// @brief Adiciona a tag inicial do arquivo svg
 /// @param svg Poneitro para o arquivo svg
-void startSCG(FILE* svg);
+void startSVG(FILE* svg);
 
 /// @brief Adiciona a tag circulo do arquivo svg
 /// @param svg Ponteiro para o arquivo svg

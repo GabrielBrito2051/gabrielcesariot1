@@ -22,6 +22,6 @@ Arquivo .h relacionado a leitura do arquivo geo
 /// @param nomeSvg Nome do arquivo svg onde serao printadas as formas do chao
 /// @param nformas Valor passado por referencia que guarda a quantidade total de formas no chao inicial
 /// @return retorna um ponteiro para a fila 'chao'
-Chao leGeo(char* nomeGeo, char* nomeSvg, int* nformas);
+Chao leGeo(FILE* geo, FILE* svg, int* nformas);
 
 #endif
