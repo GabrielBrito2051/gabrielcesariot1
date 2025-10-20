@@ -37,7 +37,21 @@ void insere_linha_svg(FILE* svg, Linha l);
 /// @brief Adiciona a tag texto do arquivo svg
 /// @param svg Ponteiro para o arquivo svg
 /// @param t Forma do texto
-void insere_texto_svg(FILE* svg, Texto t, Estilo tds);
+void insere_texto_svg(FILE* svg, Texto t, Estilo ts);
+
+/// @brief Adiciona a tag das dimensoes do disparo no svg
+/// @param svg Ponteiro para o aqruivo svg
+/// @param xdisp Coordenada x do disparador
+/// @param ydisp Coordenada y do disparador
+/// @param dx Variacao da coordenada x
+/// @param dy Variacao da coordenada y
+void insere_dimensoes_disparo(FILE* svg, double xdisp, double ydisp, double dx, double dy);
+
+/// @brief Adiciona a tag de um asterisco no local da forma destruida no svg
+/// @param arq Ponteiro para o arquivo svg
+/// @param xDestruida Coordenada x da forma destruida
+/// @param yDestruida Coordenada y da forma destruida
+void insere_asterisco(FILE* arq, double xDestruida, double yDestruida);
 
 /// @brief Adiciona a tag final do arquivo svg
 /// @param svg Ponteiro para o arquivo svg

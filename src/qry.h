@@ -17,6 +17,7 @@
 #include "linha.h"
 #include "texto.h"
 #include "txt.h"
+#include "criarSvg.h"
 
 /*
     Arquivo relacionado a leitura e processamento do arquivo qry
@@ -31,6 +32,8 @@
 /// @param listaCar A lista de carregadores
 /// @param arena A arena
 /// @param total Ponteiro para a variavel que guarda a pontuacao total do jogo
-void  leComandoQRY(FILE* qry,FILE* txt, FILE* svgQry, Fila chao, Fila listaDisp, Fila listaCar, Fila arena, double* total, int* nformas);
+/// @param nformas Valor passado por referencia que indica a quantidade total de formas do chao inicial
+/// @param ts O estilo atual do texto
+void  leComandoQRY(FILE* qry,FILE* txt, FILE* svgQry, Fila chao, Fila listaDisp, Fila listaCar, Fila arena, double* total, int* nformas, Estilo ts);
 
 #endif

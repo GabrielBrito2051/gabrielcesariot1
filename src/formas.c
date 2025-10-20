@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "geo.h"
 #include "formas.h"
+#include "criarSvg.h"
 
 typedef struct pacote{
     Forma forma;
@@ -148,11 +150,13 @@ Pacote clonarForma(Forma f, tipoforma tipo, int* nformas){
     return pacote;
 }
 
-void trocaCor(Forma f1, Forma f2){
+void trocaCor(Pacote pac1, Pacote pac2){
     int t1, t2;
     char *corb1, *corp1, *corb2, *corp2;
-    t1 = getTipoForma(f1);
-    t2 = getTipoForma(f2);
+    Forma f1 = getFORMApacote(pac1);
+    Forma f2 = getFORMApacote(pac2);
+    t1 = getTipoForma(pac1);
+    t2 = getTipoForma(pac2);
     if(t1==tipo_circulo){
         corb1 = getCORBcirculo(f1);
         corp1 = getCORPcirculo(f1);
@@ -194,6 +198,75 @@ void trocaCor(Forma f1, Forma f2){
     extra = corp1;
     corp1 = corp2;
     corp2 = extra;
+}
+
+double getXANCORAforma(Forma f,tipoforma tipo){
+    if(tipo==tipo_circulo){
+        return getXcirculo(f);
+    }
+    else if(tipo==tipo_retangulo){
+        return getXretangulo(f);
+    }
+    else if(tipo==tipo_linha){
+        if(getX1linha(f)<getX2linha(f)){
+            return getX1linha(f);
+        }
+        else if(getX1linha(f)==getX2linha(f)){
+            if(getY1linha(f)<=getY2linha(f)){
+                return getX1linha(f);
+            }else{
+                return getX2linha(f);
+            }
+        }
+        else{
+            return getX2linha(f);
+        }
+    }
+    else if(tipo==tipo_texto){
+        return getXtexto(f);
+    }
+}
+
+double getYANCORAforma(Forma f, tipoforma tipo){
+     if(tipo==tipo_circulo){
+        return getYcirculo(f);
+    }
+    else if(tipo==tipo_retangulo){
+        return getYretangulo(f);
+    }
+    else if(tipo==tipo_linha){
+         if(getX1linha(f)<getX2linha(f)){
+            return getY1linha(f);
+        }
+        else if(getX1linha(f)==getX2linha(f)){
+            if(getY1linha(f)<=getY2linha(f)){
+                return getY1linha(f);
+            }else{
+                return getY2linha(f);
+            }
+        }
+        else{
+            return getY2linha(f);
+        }
+    }
+    else if(tipo==tipo_texto){
+        return getYtexto(f);
+    }
+}
+
+void printSVGforma(FILE* svg, tipoforma tipo, Forma f, Estilo ts){
+    if(tipo==tipo_circulo){
+        insere_circulo_svg(svg, f);
+    }
+    else if(tipo==tipo_retangulo){
+        insere_retangulo_svg(svg, f);
+    }
+    else if(tipo==tipo_linha){
+        insere_linha_svg(svg, f);
+    }
+    else if(tipo==tipo_texto){
+        insere_texto_svg(svg, f, ts);
+    }
 }
 
 void freePACOTE(Pacote pac){

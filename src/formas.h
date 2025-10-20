@@ -1,7 +1,11 @@
 #ifndef formas_h
 #define formas_h
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "geo.h"
+#include "criarSvg.h"
 
 typedef enum{
     tipo_circulo,
@@ -64,9 +68,28 @@ double calculaAreaForma(Forma f, tipoforma tipo);
 Pacote clonarForma(Forma f, tipoforma tipo, int* nformas);
 
 /// @brief Troca as cores de duas formas
-/// @param f1 A primeira forma
-/// @param f2 A segunda forma
-void trocaCor(Forma f1, Forma f2);
+/// @param pac1 O pacote da primeira forma
+/// @param pac2 O pacote da segunda forma
+void trocaCor(Pacote pac1, Pacote pac2);
+
+/// @brief Pega a coordenada x da ancora da forma
+/// @param f A forma
+/// @param tipo O tipo da forma
+/// @return Retorna o valor da coordenada x da ancora da forma
+double getXANCORAforma(Forma f, tipoforma tipo);
+
+/// @brief Pega a coordenada y da ancora da forma
+/// @param f A forma
+/// @param tipo O tipo da forma
+/// @return Retorna o valor da cordnada y da ancora da forma
+double getYANCORAforma(Forma f, tipoforma tipo);
+
+/// @brief Insere a tag de uma forma no arquivo svg
+/// @param svg Ponteiro para o arquivo 
+/// @param tipo O tipo da forma
+/// @param f A forma
+/// @param ts O estilo do texto
+void printSVGforma(FILE* svg, tipoforma tipo, Forma f,Estilo ts);
 
 /// @brief Libera memoria do pacote
 /// @param pac O pacote que sera liberado

@@ -13,20 +13,12 @@
 #include "retangulo.h"
 #include "linha.h"
 #include "texto.h"
+#include "txt.h"
+#include "criarSvg.h"
 
 #define tamLinha 256
 
-void  leComandoQRY(char* nomeQry,char* nomeTxt, char* nomeSvg, Fila chao, Fila listaDisp, Fila listaCar, Fila arena, double* total, int* nformas){
-    FILE* qry = abre_arquivo_leitura(nomeQry);
-    if(qry==NULL){
-        printf("Erro ao abrir o arquivo qry");
-        exit(1);
-    }
-    FILE* txt = abre_arquivo_escrita(nomeTxt);
-    if(txt==NULL){
-        printf("Erro ao abrir o arquivo txt");
-        exit(1);
-    }
+void  leComandoQRY(FILE* qry,FILE* txt, FILE* svgQry, Fila chao, Fila listaDisp, Fila listaCar, Fila arena, double* total, int* nformas, Estilo ts){
     char* linhaQry = malloc(sizeof(char)*tamLinha);
     char comando[5];
     int  d, c, cesq, cdir, tipo;
@@ -51,10 +43,12 @@ void  leComandoQRY(char* nomeQry,char* nomeTxt, char* nomeSvg, Fila chao, Fila l
                     printf( "O chao esta sem formas. O carregador %d foi carregado com apenas %d formas", c, i);
                     break;
                 }
-                Forma formaMovida = get_inicio_fila(chao);
-                tipo = getTipoForma(formaMovida);
-                pushPilha(pilhacar, formaMovida);
+                Pacote pacFormaMovida = get_inicio_fila(chao);
+                Forma movida = getFORMApacote(pacFormaMovida);
+                tipo = getTipoForma(pacFormaMovida);
+                pushPilha(pilhacar, pacFormaMovida);
                 popFila(chao);
+                printLCarquivo(txt,tipo, movida, getIDcarregador(novocar));
             }
             pushFila(listaCar, novocar);
         }
@@ -76,6 +70,8 @@ void  leComandoQRY(char* nomeQry,char* nomeTxt, char* nomeSvg, Fila chao, Fila l
 
             attach_carregador(procurado, esquerdo_procurado, 'e');
             attach_carregador(procurado, direito_procurado, 'd');
+            removeDaFila(listaCar, esquerdo_procurado);
+            removeDaFila(listaCar, direito_procurado);
         }
 
         else if(strcmp(comando, "shft")==0){
@@ -88,17 +84,22 @@ void  leComandoQRY(char* nomeQry,char* nomeTxt, char* nomeSvg, Fila chao, Fila l
             for(int j=0;j<n;j++){
                 shift(procurado, lado);
             }
+            Pacote pac = getFormaNaMira(procurado);
+            tipo = getTipoForma(pac);
+            Forma forma = getFORMApacote(pac);
+            printSHFTarquivo(txt, tipo, forma, getIDdisparador(procurado));
         }
 
         else if(strcmp(comando, "dsp")==0){
             sscanf(linhaQry,"%*s %d %lf %lf %c",&d, &dx, &dy, &svg);
             Disparador procurado = buscar_na_fila(listaDisp, compara_disp, d);
-            Forma disparada = disparar_forma(procurado);
-            if(disparada!=NULL){
+            Pacote disparado = disparar_forma(procurado);
+            if(disparado!=NULL){
                 double xdisp, ydisp, novox, novoy;
                 xdisp = getXdisparador(procurado);
                 ydisp = getYdisparador(procurado);
-                tipo = getTipoForma(disparada);
+                tipo = getTipoForma(disparado);
+                Forma disparada = getFORMApacote(disparado);
                 if(tipo==tipo_circulo){
                     setXcirculo(disparada, xdisp+dx);
                     setYcirculo(disparada, ydisp+dy);
@@ -121,8 +122,14 @@ void  leComandoQRY(char* nomeQry,char* nomeTxt, char* nomeSvg, Fila chao, Fila l
 
                 else if(tipo==tipo_texto){
                     setXtexto(disparada, xdisp+dx);
-                    setytexto(disparada, ydisp+dy);
+                    setYtexto(disparada, ydisp+dy);
                 }
+                printDSParquivo(txt, tipo, disparada,getIDdisparador(procurado));
+                if(svg=='v'){
+                    insere_dimensoes_disparo(svgQry, xdisp, ydisp, dx, dy);
+                }
+            }else{
+                fprintf(txt," > Disparador %d: Nenhuma forma foi disparada\n");
             }
         }
 
@@ -134,10 +141,10 @@ void  leComandoQRY(char* nomeQry,char* nomeTxt, char* nomeSvg, Fila chao, Fila l
             int i = 0;
             xdisp = getXdisparador(procurado);
             ydisp = getYdisparador(procurado);
-            Forma formadisparada;
             do{
-                formadisparada = disparar_forma(procurado);
-                tipo = getTipoForma(formadisparada);
+                Pacote disparado = disparar_forma(procurado);
+                Forma formadisparada = getFORMApacote(disparado);
+                tipo = getTipoForma(disparado);
                 if(tipo==tipo_circulo){
                     setXcirculo(formadisparada, xdisp+dx+i*ix);
                     setYcirculo(formadisparada, ydisp+dy + i*iy);
@@ -162,17 +169,18 @@ void  leComandoQRY(char* nomeQry,char* nomeTxt, char* nomeSvg, Fila chao, Fila l
                     setXtexto(formadisparada,xdisp+dx+i*ix);
                     setYtexto(formadisparada,ydisp+dx+i*ix);
                 }
+                printRJDarquivo(txt, tipo, formadisparada, getIDdisparador(procurado));
                 i++;
             }while(shift(procurado, lado)!=0);
         }
 
         else if(strcmp(comando, "calc")==0){
             double rodada = 0;
-            while(getTAMANHOfila>=2){
+            while(getTAMANHOfila(arena)>=2){
                 Pacote pacote1 = get_inicio_fila(arena);
                 popFila(arena);
                 Pacote pacote2 = get_inicio_fila(arena);
-                popfila(arena);
+                popFila(arena);
                 Forma forma_i = getFORMApacote(pacote1), forma_j = getFORMApacote(pacote2);
                 if(verifica_sobreposicao(forma_i,forma_j)==1){
                     Fila formasDestruidas = criar_fila();
@@ -196,11 +204,17 @@ void  leComandoQRY(char* nomeQry,char* nomeTxt, char* nomeSvg, Fila chao, Fila l
                         setTipoForma(pac2, tipo_j);
                         setFormaPacote(pac2, forma_j);
                         pushFila(chao, pac2);
+                        printSVGforma(svgQry, tipo_j, forma_j, ts);
+                        Forma destruida = getFORMApacote(pac);
+                        tipo = getTipoForma(pac);
+                        double xAncora = getXANCORAforma(destruida, tipo);
+                        double yAncora = getYANCORAforma(destruida, tipo);
+                        insere_asterisco(svgQry, xAncora, yAncora);
                     }else{
                         tipoforma tipo_clone;
                         fprintf(txt,"RESULTADO: Troca de cores e clonagem da forma %d\n",id);
                         trocaCor(forma_i,forma_j);
-                        Forma clone = clonarForma(forma_i, tipo_i, &nformas);
+                        Forma clone = clonarForma(forma_i, tipo_i, nformas);
                         tipo_clone = tipo_i;
                         Pacote pac = criarPacote();
                         setTipoForma(pac, tipo_i);
@@ -214,6 +228,9 @@ void  leComandoQRY(char* nomeQry,char* nomeTxt, char* nomeSvg, Fila chao, Fila l
                         setTipoForma(pac3, tipo_clone);
                         setFormaPacote(pac2, clone);
                         pushFila(chao, pac3);
+                        printSVGforma(svgQry, tipo_i, forma_i, ts);
+                        printSVGforma(svgQry, tipo_j, forma_j, ts);
+                        printSVGforma(svgQry, tipo_clone, clone, ts);
                     }
                 }else{
                     tipoforma tipo_i = getTipoForma(pacote1), tipo_j = getTipoForma(pacote2);
@@ -232,6 +249,7 @@ void  leComandoQRY(char* nomeQry,char* nomeTxt, char* nomeSvg, Fila chao, Fila l
                 fprintf(txt,"A forma %d era a ultima da arena, voltou para o chao sem ser comparada\n",ids);
                 pushFila(chao, pac);
             }
+            *total += rodada;
             fprintf(txt,"----------- FIM DA RODADA -----------\n");
             fprintf(txt,"Pontuacao da Rodada: %2lf\n",rodada);
             fprintf(txt,"Pontuacao Total: %2lf\n\n",*total);

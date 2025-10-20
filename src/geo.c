@@ -8,16 +8,16 @@
 #include "linha.h"
 #include "texto.h"
 #include "fila.h"
+#include "criarSvg.h"
 
 #define tamLinha 256
 #define max_cor 8
 #define max_font 64
 #define max_text 1024
 
-Chao leGeo(FILE* geo, FILE* svg, int* nformas){
+Chao leGeo(FILE* geo, FILE* svgGeo, int* nformas, Estilo* ts){
     char* linhaGeo = malloc(sizeof(char) * tamLinha);
     Fila chao = criar_fila();
-    Estilo ts = criar_estilo("sans", "n", "12");
     int i;
     double x, x2, y, y2, r, h, w;
     char corb[max_cor], corp[max_cor], cor[max_cor];
@@ -32,6 +32,7 @@ Chao leGeo(FILE* geo, FILE* svg, int* nformas){
             setTipoForma(pac, tipo[0]);
             setFormaPacote(pac, circulo);
             pushFila(chao, pac);
+            insere_circulo_svg(svgGeo, circulo);
         }
         else if(tipo[0]=='r'){
             sscanf(linhaGeo, "%2s %d %lf %lf %lf %lf %7s %7s", tipo, &i, &x, &y, &w, &h, corb, corp);
@@ -39,6 +40,7 @@ Chao leGeo(FILE* geo, FILE* svg, int* nformas){
             setTipoForma(pac, tipo[0]);
             setFormaPacote(pac, retangulo);
             pushFila(chao, pac);
+            insere_retangulo_svg(svgGeo, retangulo);
         }
         else if(tipo[0]=='l'){
             sscanf(linhaGeo, "%2s %d %lf %lf %lf %lf %7s", tipo, &i, &x, &y, &x2, &y2, cor);
@@ -46,6 +48,7 @@ Chao leGeo(FILE* geo, FILE* svg, int* nformas){
             setTipoForma(pac, tipo[0]);
             setFormaPacote(pac, linha);
             pushFila(chao, pac);
+            insere_linha_svg(svgGeo, linha);
         }
         else if(tipo[0]=='t' && tipo[1]==' '){
             sscanf(linhaGeo, "%2s %d %lf %lf %7s %7s %c %1023[^\n] ", tipo, &i, &x, &y, corb, corp, &a, txto);
@@ -53,6 +56,7 @@ Chao leGeo(FILE* geo, FILE* svg, int* nformas){
             setTipoForma(pac, tipo[0]);
             setFormaPacote(pac, texto);
             pushFila(chao, pac);
+            insere_texto_svg(svgGeo, texto, ts);
         }
         else if(tipo[0]=='t' && tipo[1]== 's'){
             sscanf(linhaGeo,"%2s %255s %1s %255s", tipo, font, weight, size);
