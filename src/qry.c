@@ -95,7 +95,7 @@ void  leComandoQRY(FILE* qry,FILE* txt, FILE* svgQry, Fila chao, Fila listaDisp,
             Disparador procurado = buscar_na_fila(listaDisp, compara_disp, d);
             Pacote disparado = disparar_forma(procurado);
             if(disparado!=NULL){
-                double xdisp, ydisp, novox, novoy;
+                double xdisp, ydisp;
                 xdisp = getXdisparador(procurado);
                 ydisp = getYdisparador(procurado);
                 tipo = getTipoForma(disparado);
@@ -129,7 +129,7 @@ void  leComandoQRY(FILE* qry,FILE* txt, FILE* svgQry, Fila chao, Fila listaDisp,
                     insere_dimensoes_disparo(svgQry, xdisp, ydisp, dx, dy);
                 }
             }else{
-                fprintf(txt," > Disparador %d: Nenhuma forma foi disparada\n");
+                fprintf(txt," > Disparador %d: Nenhuma forma foi disparada\n",getIDdisparador(procurado));
             }
         }
 

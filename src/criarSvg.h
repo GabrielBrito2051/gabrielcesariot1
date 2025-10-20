@@ -32,7 +32,7 @@ void insere_retangulo_svg(FILE *svg, Retangulo r);
 /// @brief Adiciona a tag linha do arquivo svg
 /// @param svg Ponteiro para o arquivo svg
 /// @param l Forma da linha
-void insere_linha_svg(FILE* svg, Linha l);
+void insere_linha_svg(FILE* svg, void* l);
 
 /// @brief Adiciona a tag texto do arquivo svg
 /// @param svg Ponteiro para o arquivo svg

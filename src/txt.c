@@ -30,7 +30,7 @@ void printLCarquivo(FILE* txt, tipoforma tipo, Forma forma,int idCarregador){
                 getCORPretangulo(r));
 }
     else if(tipo==tipo_linha){
-        Linha* l = (Linha*)l;
+        Linha* l = (Linha*)forma;
         fprintf(txt, "  > Carregador %d: Carregado com [LINHA] id %d, (%.1f,%.1f) -> (%.1f,%.1f), cor=%s\n",
                 idCarregador,
                 getIlinha(l),
@@ -79,25 +79,25 @@ void printDSParquivo(FILE* txt, tipoforma tipo, Forma forma,int  idDisparador){
     if(tipo==tipo_circulo){
         Circulo* c = (Circulo*) forma;
         fprintf(txt, "  > Disparador %d: DISPAROU [CIRCULO] id %d.\n",
-                idDisparador, getIdCirculo(c));
+                idDisparador, getIcirculo(c));
         fprintf(txt, " > Nova posicao: (%lf,%lf)\n",getXcirculo(c),getYcirculo(c));
     }
     else if(tipo==tipo_retangulo){
         Retangulo* r = (Retangulo*) forma;
         fprintf(txt, "  > Disparador %d: DISPAROU [RETANGULO] id %d.\n",
-                idDisparador, getIdRetangulo(r));
+                idDisparador, getIretangulo(r));
                 fprintf(txt," > Nova posicao: (%lf, %lf)",getXretangulo(r),getYretangulo(r));
     }
     else if(tipo==tipo_linha){
         Linha* l = (Linha*) forma;
         fprintf(txt, "  > Disparador %d: DISPAROU [LINHA] id %d.\n",
-                idDisparador, getIdLinha(l));
+                idDisparador, getIlinha(l));
                 fprintf(txt," > Nova posicao: (%lf, %lf)",getX1linha(l),getY1linha(l));
     }
     else if(tipo==tipo_texto){
         Texto* t = (Texto*) forma;
         fprintf(txt, "  > Disparador %d: DISPAROU [TEXTO] id %d.\n",
-                idDisparador, getIdTexto(t));
+                idDisparador, getItexto(t));
                 fprintf(txt," > Nova posicao: (%lf, %lf)",getXtexto(t),getYtexto(t));
     }
 }
@@ -127,7 +127,7 @@ void printRJDarquivo(FILE* txt, tipoforma tipo, Forma forma,int idDisparador){
                 getCORPretangulo(r));
     }
     else if(tipo==tipo_linha){
-       Linha* l = (Linha*)l;
+       Linha* l = (Linha*)forma;
         fprintf(txt, "  > Disparador %d: Disparou um [LINHA] id %d, (%.1f,%.1f) -> (%.1f,%.1f), cor=%s\n",
                 idDisparador,
                 getIlinha(l),

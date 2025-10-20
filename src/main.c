@@ -88,9 +88,8 @@ int main(int argc, char* argv[])
     Fila listaCar = criar_fila();
     Fila arena = criar_fila();
     Fila chao = criar_fila();
-    Fila formasDestruidas = criar_fila();
     int nformas = 0;
-    int total = 0;
+    double total = 0;
     Estilo ts = criar_estilo("sans", "n", "12");
 
    chao =  leGeo(geo, svgGeo, &nformas, &ts);

@@ -2,8 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include "geo.h"
-#include "formas.h"
-#include "criarSvg.h"
 
 typedef struct pacote{
     Forma forma;
@@ -67,7 +65,7 @@ int getIDforma(Forma f, tipoforma tipo){
     else if(tipo==tipo_linha){
         return getIlinha(f);
     }
-    else if(tipo==tipo_texto){
+    else{
         return getItexto(f);
     }
 }
@@ -82,7 +80,7 @@ void setTipoForma(Pacote p, char tipo){
     else if(tipo=='l'){
         p->tipo = tipo_linha;
     }
-    else if(tipo=='t'){
+    else{
         p->tipo = tipo_texto;
     }
 }
@@ -101,7 +99,7 @@ double calculaAreaForma(Forma f, tipoforma tipo){
     else if(tipo==tipo_linha){
        return  calcula_area_linha(f);
     }
-    else if(tipo==tipo_texto){
+    else{
        return  calcula_area_texto(f);
     }
 }
@@ -222,7 +220,7 @@ double getXANCORAforma(Forma f,tipoforma tipo){
             return getX2linha(f);
         }
     }
-    else if(tipo==tipo_texto){
+    else{
         return getXtexto(f);
     }
 }
@@ -249,7 +247,7 @@ double getYANCORAforma(Forma f, tipoforma tipo){
             return getY2linha(f);
         }
     }
-    else if(tipo==tipo_texto){
+    else{
         return getYtexto(f);
     }
 }
