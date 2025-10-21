@@ -86,4 +86,12 @@ void setCORPcirculo(Circulo c, char* corp);
 /// @return O valor da area do circulo c
 double calcula_area_circulo(Circulo c);
 
+/// @brief Libera a memoria da cor de borda do circulo
+/// @param c O circulo
+void freeCorbCir(Circulo c);
+
+/// @brief Libera a memoria da cor de preenchimento do circulo
+/// @param c O circulo
+void freeCorpCir(Circulo c);
+
 #endif

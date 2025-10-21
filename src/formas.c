@@ -3,13 +3,13 @@
 #include <string.h>
 #include "geo.h"
 
-typedef struct pacote{
+struct pacote{
     Forma forma;
     tipoforma tipo;
 };
 
 Pacote criarPacote(){
-    Pacote pac = malloc(sizeof(Pacote));
+    Pacote pac = malloc(sizeof(struct pacote));
     return pac;
 }
 
@@ -135,7 +135,7 @@ Pacote clonarForma(Forma f, tipoforma tipo, int* nformas){
     else if(tipo==tipo_texto){
         x = getXtexto(f);
         y = getYtexto(f);
-        corb = getCORtexto(f);
+        corb = getCORBtexto(f);
         corp = getCORPtexto(f);
         char a = getAtexto(f);
         char* txto = getTXTOtexto(f);
@@ -168,7 +168,7 @@ void trocaCor(Pacote pac1, Pacote pac2){
         corp1 = getCORCOMPLlinha(f1);
     }
     else if(t1==tipo_linha){
-        corb1 = getCORtexto(f1);
+        corb1 = getCORBtexto(f1);
         corp1 = getCORPtexto(f1);
     }
 
@@ -185,7 +185,7 @@ void trocaCor(Pacote pac1, Pacote pac2){
         corp2 = getCORCOMPLlinha(f2);
     }
     else if(t2==tipo_linha){
-        corb2 = getCORtexto(f2);
+        corb2 = getCORBtexto(f2);
         corp2 = getCORPtexto(f2);
     }
     char* extra;
@@ -262,11 +262,33 @@ void printSVGforma(FILE* svg, tipoforma tipo, Forma f, Estilo ts){
     else if(tipo==tipo_linha){
         insere_linha_svg(svg, f);
     }
-    else if(tipo==tipo_texto){
+    else{
         insere_texto_svg(svg, f, ts);
     }
 }
 
-void freePACOTE(Pacote pac){
+void destruirFormaPacote(Pacote pac){
+
+    if(pac->tipo==tipo_circulo){
+        freeCorbCir(pac->forma);
+        freeCorpCir(pac->forma);
+    }
+    else if(pac->tipo==tipo_retangulo){
+        freeCorbRet(pac->forma);
+        freeCorpRet(pac->forma);
+    }
+    else if(pac->tipo==tipo_linha){
+        freeCorbLinha(pac->forma);
+        freeCorpLinha(pac->forma);
+    }
+    else{
+        freeCorpTexto(pac->forma);
+        freeCorbTexto(pac->forma);
+    }
+    free(pac->forma);
+}
+
+void freePacote(Pacote pac){
+    destruirFormaPacote(pac);
     free(pac);
 }

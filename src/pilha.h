@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "formas.h"
 
 typedef void* Pilha;
 typedef void* Forma;
@@ -36,6 +37,6 @@ Forma get_topo_pilha(Pilha p);
 
 /// @brief Libera a memoria de uma pilha
 /// @param p A pilha que sera liberada
-void free_pilha(Pilha p);
+void destruir_pilha(Pilha p);
 
 #endif

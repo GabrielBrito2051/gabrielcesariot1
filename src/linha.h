@@ -97,4 +97,12 @@ void setCORlinha(Linha l, char* cor);
 /// @return Retorna a area da linha
 double calcula_area_linha(Linha l);
 
+/// @brief Libera a memoria da cor de borda da linha
+/// @param l A linha
+void freeCorbLinha(Linha l);
+
+/// @brief Libera a memoria da cor de preenchimento da linha
+/// @param l A linha
+void freeCorpLinha(Linha l);
+
 #endif

@@ -28,12 +28,14 @@ int  compara_disp(int d, Disparador DispDaLista){
     return (dispextra->d == d) ? 1 : 0;
 }
 
-void free_disp(Disparador disp){
+void destruir_disp(Disparador disp){
     disparador* var = (disparador*)disp;
+    destruir_carregador(var->cdir);
+    destruir_carregador(var->cesq);
     free(var);
 }
 
-void attach_carreador(Disparador disp, Carregador car, char lado){
+void attach_carregador(Disparador disp, Carregador car, char lado){
     disparador* castdisp = (disparador*) disp;
     if (lado == 'e'){
         castdisp->cesq = car;

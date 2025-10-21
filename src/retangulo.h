@@ -97,4 +97,12 @@ void setCORPretangulo(Retangulo r, char* corp);
 /// @return O valor da area do retangulo r
 double calcula_area_retangulo(Retangulo r);
 
+/// @brief Libera a memoria da cor de borda do retangulo
+/// @param r 
+void freeCorbRet(Retangulo r);
+
+/// @brief Libera a memoria da cor de preenchimento do retangulo
+/// @param r 
+void freeCorpRet(Retangulo r);
+
 #endif

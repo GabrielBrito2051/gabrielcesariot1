@@ -4,6 +4,7 @@
 #include "carregador.h"
 #include "pilha.h"
 #include "fila.h"
+#include "formas.h"
 
 typedef struct{
     int c;
@@ -32,11 +33,10 @@ int getIDcarregador(Carregador car){
     return ((carregador*)car)->c;
 }
 
-void free_carregador(Carregador car){
-    if(verifica_pilha_vazia(((carregador*)car)->formas)==1){
-        carregador *castcar = ((carregador*)car);
-        free(castcar);
-    }
+void destruir_carregador(Carregador car){
+    carregador* var = (carregador*) car;
+    destruir_pilha(var->formas);
+    free(var);
 }
 
 Pilha getPILHAcarregador(Carregador car){

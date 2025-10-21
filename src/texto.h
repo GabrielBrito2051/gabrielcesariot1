@@ -77,8 +77,8 @@ double getYtexto(Texto t);
 
 /// @brief Pega o valor hexadecimal da cor do texto t
 /// @param t O texto que tera a cor lida
-/// @return Retorna um array de caracteres com o valor hexadecimal da cor do texto
-char* getCORtexto(Texto t);
+/// @return Retorna um array de caracteres com o valor hexadecimal da cor de borda do texto
+char* getCORBtexto(Texto t);
 
 /// @brief Pega o valor hexadecimal da cor complementar do texto t
 /// @param t O texto que tera a cor complementar lida
@@ -117,7 +117,7 @@ void setYtexto(Texto t, double y);
 
 /// @brief Define o valor hexadecimal da cor do texto t
 /// @param t O texto no qual tera sua cor definida
-/// @param cor O valor hexadecimal da cor do texto
+/// @param cor O valor hexadecimal da cor de borda do texto
 void setCORBtexto(Texto t, char* corb);
 
 /// @brief Define o valor hexadecimal da cor complementar do texto t
@@ -140,5 +140,13 @@ void setTXTOtexto(Texto t, char* txto);
 /// @param tamanho A quantia de caracteres presentes no texto t
 /// @return Retorna a area do texto t
 double calcula_area_texto(Texto t);
+
+/// @brief Libera a memoria da cor de borda do texto
+/// @param t O texto
+void freeCorbTexto(Texto t);
+
+/// @brief Libera a memoria da cor de preenchimento do texto
+/// @param t O texto
+void freeCorpTexto(texto t);
 
 #endif

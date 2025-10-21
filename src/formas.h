@@ -91,8 +91,12 @@ double getYANCORAforma(Forma f, tipoforma tipo);
 /// @param ts O estilo do texto
 void printSVGforma(FILE* svg, tipoforma tipo, Forma f,Estilo ts);
 
+/// @brief Libera a memoria de uma forma dentro do pacote
+/// @param pac O pacote
+void destruirFormaPacote(Pacote pac);
+
 /// @brief Libera memoria do pacote
 /// @param pac O pacote que sera liberado
-void freePACOTE(Pacote pac);
+void freePacote(Pacote pac);
 
 #endif

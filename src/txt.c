@@ -71,7 +71,7 @@ void printSHFTarquivo(FILE* txt, tipoforma tipo, Forma forma, int idDisparador){
     else if(tipo==tipo_texto){
         Texto* t = (Texto*) forma;
         fprintf(txt, "  > Disparador %d: [TEXTO] id %d, (%lf,%lf), borda=%s, preench=%s, ancora=%c esta na mira.\n",
-                idDisparador, getItexto(t), getXtexto(t), getYtexto(t), getCORtexto(t), getCORPtexto(t), getAtexto(t));
+                idDisparador, getItexto(t), getXtexto(t), getYtexto(t), getCORBtexto(t), getCORPtexto(t), getAtexto(t));
     }
 }
 

@@ -159,3 +159,13 @@ void setTXTOtexto(Texto t, char* txto){
 double calcula_area_texto(Texto t){
     return (20 * strlen(((texto*)t)->txto));
 }
+
+void freeCorbTexto(Texto t){
+    texto* var = (texto*)t;
+    free(var->corb);
+}
+
+void freeCorpTexto(Texto t){
+    texto* var = (texto*)t;
+    free(var->corp);
+}

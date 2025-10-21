@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "pilha.h"
+#include "formas.h"
 
 typedef struct ELEMENTO{
     Forma forma;
@@ -60,7 +61,18 @@ Forma get_topo_pilha(Pilha p){
     return (((pilha*)p)->topo->forma);
 }
 
-void free_pilha(Pilha p){
+void destruir_pilha(Pilha p){
     pilha* var = (pilha*)p;
+    if(var==NULL){
+        return;
+    }
+    pont atual = var->topo;
+    pont apagar;
+    while(atual!=NULL){
+        apagar = atual;
+        atual = atual->prox;
+        freePacote(apagar->forma);
+        free(apagar);
+    }
     free(var);
 }

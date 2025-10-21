@@ -86,3 +86,13 @@ void setCORPcirculo(Circulo c, char* corp){
 double calcula_area_circulo(Circulo c){
     return pi * ((circulo*)c)->r * ((circulo*)c)->r;
 }
+
+void freeCorbCir(Circulo c){
+    circulo* var = (circulo*)c;
+    free(var->corb);
+}
+
+void freeCorpCir(Circulo c){
+    circulo* var = (circulo*)c;
+    free(var->corp);
+}

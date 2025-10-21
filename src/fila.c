@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "fila.h"
+#include "formas.h"
+#include "disparador.h"
 
 typedef struct ELEMENTO{
     Forma forma;
@@ -110,7 +112,18 @@ void removeDaFila(Fila f, Forma forma){
     free(atual);
 }
 
-void free_fila(Fila f){
-    fila* var = (fila*) f;
+void destruir_fila(Fila f){
+    fila* var = (fila*)f;
+    if(var==NULL){
+        return;
+    }
+    pont atual = var->inicio;
+    pont apagar;
+    while(atual!=NULL){
+        apagar = atual;
+        atual = atual->prox;
+        destruir_disp(apagar->forma);
+        free(apagar);
+    }
     free(var);
 }

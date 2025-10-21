@@ -103,3 +103,13 @@ void setCORlinha(Linha l, char* cor){
 double calcula_area_linha(Linha l){
     return (2 * sqrt(pow(((linha*)l)->x1 - ((linha*)l)->x2,2) + pow(((linha*)l)->y1 - ((linha*)l)->y2,2)));
 }
+
+void freeCorbLinha(Linha l){
+    linha* var = (linha*)l;
+    free(var->cor);
+}
+
+void freeCorpLinha(Linha l){
+    linha* var = (linha*)l;
+    free(var->corcompl);
+}

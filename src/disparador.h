@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include "pilha.h"
 #include "carregador.h"
+#include "formas.h"
 
 /*
     Arquivo .h relacionado ao disparador e suas funcoes
@@ -26,7 +27,7 @@ int compara_disp(int d, Disparador DispDaLista);
 
 /// @brief Libera a memoria de um disparador
 /// @param disp O disparador que sera liberado da memoria
-void free_disp(Disparador disp);
+void destruir_disp(Disparador disp);
 
 /// @brief Encaixa um carregador a um dos lados do disparador
 /// @param disp O disparador que tera um carregador encaixado

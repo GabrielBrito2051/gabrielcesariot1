@@ -30,8 +30,8 @@ Carregador cria_carregador(int c);
 int getIDcarregador(Carregador car);
 
 /// @brief Libera a memoria de um carregador que nao e mais necessario
-/// @param c O carregador que sera liberado
-void free_carregador(Carregador car); 
+/// @param car O carregador que sera liberado
+void destruir_carregador(Carregador car); 
 
 /// @brief Pega a pilha de formas do carregador
 /// @param car O carregador que tera sua pilha pega

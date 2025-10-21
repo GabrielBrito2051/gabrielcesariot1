@@ -93,3 +93,13 @@ void setCORPretangulo(Retangulo r, char* corp){
 double calcula_area_retangulo(Retangulo r){
     return (((retangulo*)r)->w * ((retangulo*)r)->h);
 }
+
+void freeCorbRet(Retangulo r){
+    retangulo* var = (retangulo*) r;
+    free(var->corb);
+}
+
+void freeCorpRet(Retangulo r){
+    retangulo* var = (retangulo*) r;
+    free(var->corp);
+}
