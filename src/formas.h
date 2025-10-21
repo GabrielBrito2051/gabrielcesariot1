@@ -99,4 +99,8 @@ void destruirFormaPacote(Pacote pac);
 /// @param pac O pacote que sera liberado
 void freePacote(Pacote pac);
 
+/// @brief Libera a memoria do estilo
+/// @param ts O estilo
+void free_estilo(Estilo ts);
+
 #endif

@@ -47,6 +47,10 @@ void setWEIGHT(Estilo ts, char* weight);
 /// @param size O tamanho da fonte
 void setSIZE(Estilo ts, char* size);
 
+/// @brief Libera a memoria do estilo
+/// @param ts O estilo
+void freeEstilo(Estilo ts);
+
 // FUNCOES DE TEXTO //
 
 /// @brief Cria um texto com os valores dos parametros especificados
@@ -147,6 +151,6 @@ void freeCorbTexto(Texto t);
 
 /// @brief Libera a memoria da cor de preenchimento do texto
 /// @param t O texto
-void freeCorpTexto(texto t);
+void freeCorpTexto(Texto t);
 
 #endif

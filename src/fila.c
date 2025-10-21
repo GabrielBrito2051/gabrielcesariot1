@@ -138,13 +138,13 @@ void destruir_fila_car(Fila f){
     while(atual!=NULL){
         apagar = atual;
         atual = atual->prox;
-        destruir_carregador(atual->forma);
+        destruir_carregador(apagar->forma);
         free(apagar);
     }
     free(var);
 }
 
-void destruir_chao(Chao chao){
+void destruir_chao(Fila chao){
     fila* var = (fila*)chao;
     if(var==NULL){
         return;
@@ -154,7 +154,25 @@ void destruir_chao(Chao chao){
     while(atual!=NULL){
         apagar = atual;
         atual = atual->prox;
-        freePacote(apagar->forma);
+        destruirFormaPacote(apagar->forma);
+        free(apagar->forma);
+        free(apagar);
     }
     free(var);
+}
+
+void destruir_arena(Fila f){
+    fila* var = (fila*)f;
+    if(var==NULL){
+        return;
+    }
+    pont atual = var->inicio;
+    pont apagar;
+    while(atual!=NULL){
+        apagar = atual;
+        atual = atual->prox;
+        freePacote(apagar->forma);
+        free(apagar);
+    }
+    free(f);
 }

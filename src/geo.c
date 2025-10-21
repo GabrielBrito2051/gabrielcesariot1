@@ -15,18 +15,17 @@
 #define max_font 64
 #define max_text 1024
 
-Chao leGeo(FILE* geo, FILE* svgGeo, int* nformas, Estilo* ts){
+void leGeo(FILE* geo, FILE* svgGeo, int* nformas, Estilo* ts, Fila chao){
     char* linhaGeo = malloc(sizeof(char) * tamLinha);
-    Fila chao = criar_fila();
     int i;
     double x, x2, y, y2, r, h, w;
     char corb[max_cor], corp[max_cor], cor[max_cor];
     char font[max_font], size[max_font], weight[max_font];
     char txto[max_text], tipo[3], a;
     while(le_linha(geo, linhaGeo)!=NULL){
-        Pacote pac = criarPacote();
         sscanf(linhaGeo, "%2s",tipo);
         if(tipo[0]=='c'){
+            Pacote pac = criarPacote();
             sscanf(linhaGeo, "%2s %d %lf %lf %lf %7s %7s",tipo, &i, &x, &y, &r, corb, corp);
             Circulo circulo = criar_circulo(i, x, y, r, corb, corp);
             setTipoForma(pac, tipo[0]);
@@ -35,6 +34,7 @@ Chao leGeo(FILE* geo, FILE* svgGeo, int* nformas, Estilo* ts){
             insere_circulo_svg(svgGeo, circulo);
         }
         else if(tipo[0]=='r'){
+            Pacote pac = criarPacote(); 
             sscanf(linhaGeo, "%2s %d %lf %lf %lf %lf %7s %7s", tipo, &i, &x, &y, &w, &h, corb, corp);
             Retangulo retangulo = criar_retangulo(i, x, y, w, h, corb, corp);
             setTipoForma(pac, tipo[0]);
@@ -43,6 +43,7 @@ Chao leGeo(FILE* geo, FILE* svgGeo, int* nformas, Estilo* ts){
             insere_retangulo_svg(svgGeo, retangulo);
         }
         else if(tipo[0]=='l'){
+            Pacote pac = criarPacote();
             sscanf(linhaGeo, "%2s %d %lf %lf %lf %lf %7s", tipo, &i, &x, &y, &x2, &y2, cor);
             Linha linha = criar_linha(i, x, y, x2, y2, cor);
             setTipoForma(pac, tipo[0]);
@@ -51,6 +52,7 @@ Chao leGeo(FILE* geo, FILE* svgGeo, int* nformas, Estilo* ts){
             insere_linha_svg(svgGeo, linha);
         }
         else if(tipo[0]=='t' && tipo[1]==' '){
+            Pacote pac = criarPacote();
             sscanf(linhaGeo, "%2s %d %lf %lf %7s %7s %c %1023[^\n] ", tipo, &i, &x, &y, corb, corp, &a, txto);
             Texto texto = criar_texto(i, x, y, corp, corb, a, txto);
             setTipoForma(pac, tipo[0]);
@@ -68,5 +70,4 @@ Chao leGeo(FILE* geo, FILE* svgGeo, int* nformas, Estilo* ts){
 
     *nformas = getTAMANHOfila(chao);
     free(linhaGeo);
-    return chao;
 }

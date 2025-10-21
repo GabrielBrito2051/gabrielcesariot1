@@ -70,6 +70,14 @@ void setSIZE(Estilo ts, char* size){
     strcpy(var->size, size);
 }
 
+void freeEstilo(Estilo ts){
+    estilo* var = (estilo*)ts;
+    free(var->family);
+    free(var->size);
+    free(var->weight);
+    free(var);
+}
+
 Texto criar_texto(int i, double x, double y, char* corb, char* corp, char a, char* txto){
     texto *t = malloc(sizeof(texto));
     t->i = i;

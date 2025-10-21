@@ -40,7 +40,7 @@ void  leComandoQRY(FILE* qry,FILE* txt, FILE* svgQry, Fila chao, Fila listaDisp,
 
             for(int i=0;i<n;i++){
                 if(verifica_fila_vazia(chao)==1){
-                    printf( "O chao esta sem formas. O carregador %d foi carregado com apenas %d formas", c, i);
+                   fprintf(txt, "O chao esta sem formas. O carregador %d foi carregado com apenas %d formas", c, i);
                     break;
                 }
                 Pacote pacFormaMovida = get_inicio_fila(chao);
@@ -78,7 +78,7 @@ void  leComandoQRY(FILE* qry,FILE* txt, FILE* svgQry, Fila chao, Fila listaDisp,
             sscanf(linhaQry,"%*s %d %c %d",&d, &lado, &n );
             Disparador procurado = buscar_na_fila(listaDisp, compara_disp, d);
             if(procurado==NULL){
-                printf("Disparador nao encontrado");
+                fprintf(txt,"Disparador nao encontrado");
                 return;
             }
             for(int j=0;j<n;j++){

@@ -57,6 +57,10 @@ void destruir_fila_car(Fila f);
 
 /// @brief Libera a memoria do chao
 /// @param chao O chao
-void destruir_chao(Chao chao);
+void destruir_chao(Fila chao);
+
+/// @brief Libera a memoria da arena
+/// @param f A arena
+void destruir_arena(Fila f);
 
 #endif

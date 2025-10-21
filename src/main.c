@@ -47,23 +47,23 @@ int main(int argc, char* argv[])
         return EXIT_FAILURE;
     }
 
-    char fullPathGeo[PATH_LEN + FILE_NAME_LEN];
+    char fullPathGeo[1024];
     snprintf(fullPathGeo, sizeof(fullPathGeo), "%s/%s", dirEntrada, nomeArquivoGeo);
 
-    char fullPathQry[PATH_LEN + FILE_NAME_LEN];
+    char fullPathQry[1024];
     if (strlen(nomeArquivoQry) > 0) {
         snprintf(fullPathQry, sizeof(fullPathQry), "%s/%s", dirEntrada, nomeArquivoQry);
     }
 
-    char arquivoSaidaSvgGeo[PATH_LEN + FILE_NAME_LEN];
+    char arquivoSaidaSvgGeo[1024];
     snprintf(arquivoSaidaSvgGeo, sizeof(arquivoSaidaSvgGeo), "%s/%s.svg", dirSaida, nomeArquivoGeo);
 
-    char arquivoSaidaSvgQry[PATH_LEN + FILE_NAME_LEN];
+    char arquivoSaidaSvgQry[1024];
     if (strlen(nomeArquivoQry) > 0) {
         snprintf(arquivoSaidaSvgQry, sizeof(arquivoSaidaSvgQry), "%s/%s.svg", dirSaida, onlyQry);
     }
 
-    char arquivoSaidaTxt[PATH_LEN + FILE_NAME_LEN];
+    char arquivoSaidaTxt[1024];
     if (strlen(nomeArquivoQry) > 0) {
         snprintf(arquivoSaidaTxt, sizeof(arquivoSaidaTxt), "%s/%s.txt", dirSaida, onlyQry);
     }
@@ -103,7 +103,7 @@ int main(int argc, char* argv[])
     double total = 0;
     Estilo ts = criar_estilo("sans", "n", "12");
 
-   chao =  leGeo(geo, svgGeo, &nformas, &ts);
+   leGeo(geo, svgGeo, &nformas, &ts, chao);
    fechasvg(svgGeo);
 
    svgQry = abre_arquivo_escrita(arquivoSaidaSvgQry);
@@ -121,8 +121,8 @@ int main(int argc, char* argv[])
    destruir_fila_disp(listaDisp);
    destruir_fila_car(listaCar);
    destruir_chao(chao);
-   free(arena);
-   free(ts);
+   destruir_arena(arena); 
+   freeEstilo(ts);
 
  return 0;
 }

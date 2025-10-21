@@ -67,7 +67,6 @@ int shift(Disparador disp, char lado){
             popPilha(pilha_origem);
             return 1;
         }else{
-             printf("Nao ha mais formas no carregador de origem, disparador agora esta vazio!");
             castdisp->pos_disparo=NULL;
             return 0;
         }
