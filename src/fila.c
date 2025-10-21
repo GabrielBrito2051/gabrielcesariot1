@@ -112,7 +112,7 @@ void removeDaFila(Fila f, Forma forma){
     free(atual);
 }
 
-void destruir_fila(Fila f){
+void destruir_fila_disp(Fila f){
     fila* var = (fila*)f;
     if(var==NULL){
         return;
@@ -124,6 +124,37 @@ void destruir_fila(Fila f){
         atual = atual->prox;
         destruir_disp(apagar->forma);
         free(apagar);
+    }
+    free(var);
+}
+
+void destruir_fila_car(Fila f){
+    fila* var = (fila*)f;
+    if(var==NULL){
+        return;
+    }
+    pont atual = var->inicio;
+    pont apagar;
+    while(atual!=NULL){
+        apagar = atual;
+        atual = atual->prox;
+        destruir_carregador(atual->forma);
+        free(apagar);
+    }
+    free(var);
+}
+
+void destruir_chao(Chao chao){
+    fila* var = (fila*)chao;
+    if(var==NULL){
+        return;
+    }
+    pont atual = var->inicio;
+    pont apagar;
+    while(atual!=NULL){
+        apagar = atual;
+        atual = atual->prox;
+        freePacote(apagar->forma);
     }
     free(var);
 }

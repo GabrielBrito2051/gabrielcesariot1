@@ -75,9 +75,20 @@ int main(int argc, char* argv[])
     FILE* svgQry = NULL;
 
     geo = abre_arquivo_leitura(fullPathGeo);
+    if (geo==NULL){
+        printf("Erro ao abri o arquivo geo");
+    }
     if(strlen(nomeArquivoQry) > 0){
         qry = abre_arquivo_leitura(fullPathQry);
+        if(qry==NULL){
+            printf("Erro ao abrir o arquivo qry");
+            EXIT_FAILURE;
+        }
         txt = abre_arquivo_escrita(arquivoSaidaTxt);
+        if(txt==NULL){
+            printf("Erroa ao abrir o arquivo txt");
+            EXIT_FAILURE;
+        }
         svgQry = abre_arquivo_escrita(arquivoSaidaSvgQry);
         startSVG(svgQry);
     }
@@ -106,6 +117,12 @@ int main(int argc, char* argv[])
    fecha_arquivo(txt);
    fecha_arquivo(geo);
    fecha_arquivo(qry);
+
+   destruir_fila_disp(listaDisp);
+   destruir_fila_car(listaCar);
+   destruir_chao(chao);
+   free(arena);
+   free(ts);
 
  return 0;
 }

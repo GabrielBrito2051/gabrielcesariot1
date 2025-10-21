@@ -47,8 +47,16 @@ Forma buscar_na_fila(Fila f, int (*comparaElemento)(int i,  void* elemento),int 
 /// @param forma O item que sera removido
 void removeDaFila(Fila f, Forma forma);
 
-/// @brief Libera a memoria de uma fila
-/// @param f A fila que sera liberada
-void destruir_fila(Fila f); 
+/// @brief Libera a memoria da fila de disparadores
+/// @param f A fila
+void destruir_fila_disp(Fila f); 
+
+/// @brief Libera a memoria da fila de carregadores
+/// @param f A fila
+void destruir_fila_car(Fila f);
+
+/// @brief Libera a memoria do chao
+/// @param chao O chao
+void destruir_chao(Chao chao);
 
 #endif

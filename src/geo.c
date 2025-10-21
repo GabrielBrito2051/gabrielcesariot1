@@ -67,5 +67,6 @@ Chao leGeo(FILE* geo, FILE* svgGeo, int* nformas, Estilo* ts){
     }
 
     *nformas = getTAMANHOfila(chao);
+    free(linhaGeo);
     return chao;
 }

@@ -255,5 +255,5 @@ void  leComandoQRY(FILE* qry,FILE* txt, FILE* svgQry, Fila chao, Fila listaDisp,
             fprintf(txt,"Pontuacao Total: %2lf\n\n",*total);
         }
     }
-    
+    free(linhaQry);
 }
