@@ -210,7 +210,6 @@ void  leComandoQRY(FILE* qry,FILE* txt, FILE* svgQry, Fila chao, Fila listaDisp,
                         Pacote pacClone = clonarForma(forma_i, tipo_i, nformas);
                         tipoforma tipo_clone = getTipoForma(pacClone);
                         Forma clone = getFORMApacote(pacClone);
-                        printf("-----------%d-----------",tipo_clone);
                         pushFila(chao, pacClone);
                         printSVGforma(svgQry, tipo_i, forma_i, ts);
                         printSVGforma(svgQry, tipo_j, forma_j, ts);

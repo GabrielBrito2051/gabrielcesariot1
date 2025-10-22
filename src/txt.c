@@ -19,7 +19,7 @@ void printLCarquivo(FILE* txt, tipoforma tipo, Forma forma,int idCarregador){
     }
     else if(tipo==tipo_retangulo){
         Retangulo* r = (Retangulo*) forma;
-        fprintf(txt, "  > Carregador %d: Carregado com [RETANGULO] id %d, (%.1f,%.1f), w=%.1f, h=%.1f, borda=%s, preench=%s\n",
+        fprintf(txt, "  > Carregador %d: Carregado com [RETANGULO] id %d, (%.1f,%.1f), w=%.1f, h=%.1f, borda= %s, preench= %s\n",
                 idCarregador,
                 getIretangulo(r),
                 getXretangulo(r),

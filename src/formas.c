@@ -114,11 +114,9 @@ Pacote clonarForma(Forma f, tipoforma tipo, int* nformas){
     char* corb, *corp;
     Forma clone;
     if(tipo==tipo_circulo){
-        int tam = strlen(getCORBcirculo(f));
         x = getXcirculo(f);
         y = getYcirculo(f);
         double r = getRcirculo(f);
-        corb = malloc(tam+1);
         corb = getCORBcirculo(f);
         corp = getCORPcirculo(f);
         clone = criar_circulo(id, x, y, r, corb, corp);
@@ -132,7 +130,6 @@ Pacote clonarForma(Forma f, tipoforma tipo, int* nformas){
         clone = criar_retangulo(id, x, y, w, h, corb, corp);
     }
     else if(tipo==tipo_linha){
-        int tam = strlen(getCORlinha(f));
         x = getX1linha(f);
         y = getY1linha(f);
         double x2 = getX2linha(f), y2 = getY2linha(f);
@@ -140,7 +137,6 @@ Pacote clonarForma(Forma f, tipoforma tipo, int* nformas){
         clone = criar_linha(id, x, y, x2, y2, corb);
     }
     else if(tipo==tipo_texto){
-        int tam = strlen(getCORBtexto(f));
         x = getXtexto(f);
         y = getYtexto(f);
         corb = getCORBtexto(f);
@@ -196,14 +192,17 @@ void trocaCor(Pacote pac1, Pacote pac2){
         corb2 = getCORBtexto(f2);
         corp2 = getCORPtexto(f2);
     }
-    char* extra;
-    extra = corb1;
-    corb1 = corb2;
-    corb2 = extra;
+    char* extra = malloc(strlen(corb1)+1);
 
-    extra = corp1;
-    corp1 = corp2;
-    corp2 = extra;
+    strcpy(extra, corb1);
+    strcpy(corb1,corb2);
+    strcpy(corb2,extra);
+
+    strcpy(extra,corp1);
+    strcpy(corp1, corp2);
+    strcpy(corp2, extra);
+    free(extra);
+
 }
 
 double getXANCORAforma(Forma f,tipoforma tipo){
