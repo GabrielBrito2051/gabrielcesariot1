@@ -8,7 +8,7 @@
 void printLCarquivo(FILE* txt, tipoforma tipo, Forma forma,int idCarregador){
     if(tipo==tipo_circulo){
        Circulo* c = (Circulo*) forma;
-        fprintf(txt, "  > Carregador %d: Carregado com [CIRCULO] id %d, (%.1f,%.1f), r=%.1f, borda=%s, preench=%s\n",
+        fprintf(txt, "  > Carregador %d: Carregado com [CIRCULO] id %d, (%.1f,%.1f), r=%.1f, borda= %s, preench= %s\n",
                 idCarregador,
                 getIcirculo(c), 
                 getXcirculo(c),
@@ -31,7 +31,7 @@ void printLCarquivo(FILE* txt, tipoforma tipo, Forma forma,int idCarregador){
 }
     else if(tipo==tipo_linha){
         Linha* l = (Linha*)forma;
-        fprintf(txt, "  > Carregador %d: Carregado com [LINHA] id %d, (%.1f,%.1f) -> (%.1f,%.1f), cor=%s\n",
+        fprintf(txt, "  > Carregador %d: Carregado com [LINHA] id %d, (%.1f,%.1f) -> (%.1f,%.1f), cor= %s\n",
                 idCarregador,
                 getIlinha(l),
                 getX1linha(l),
@@ -42,11 +42,13 @@ void printLCarquivo(FILE* txt, tipoforma tipo, Forma forma,int idCarregador){
     }
     else if(tipo==tipo_texto){
        Texto* t = (Texto*) forma;
-        fprintf(txt, "  > Carregador %d: Carregado com [TEXTO] id %d, (%.1f,%.1f), ancora=%c, texto=\"%s\"\n",
+        fprintf(txt, "  > Carregador %d: Carregado com [TEXTO] id %d, (%.1f,%.1f),borda= %s, preench= %s ancora=%c, texto=\"%s\"\n",
                 idCarregador,
                 getItexto(t),
                 getXtexto(t),
                 getYtexto(t),
+                getCORBtexto(t),
+                getCORPtexto(t),
                 getAtexto(t),
                 getTXTOtexto(t));
     }
@@ -55,12 +57,12 @@ void printLCarquivo(FILE* txt, tipoforma tipo, Forma forma,int idCarregador){
 void printSHFTarquivo(FILE* txt, tipoforma tipo, Forma forma, int idDisparador){
     if(tipo==tipo_circulo){
         Circulo* c = (Circulo*) forma;
-        fprintf(txt, "  > Disparador %d: [CIRCULO] id %d, r=%.1f, borda=%s, preench=%s esta na mira.\n",
+        fprintf(txt, "  > Disparador %d: [CIRCULO] id %d, r=%.1f, borda= %s, preench= %s esta na mira.\n",
                 idDisparador, getIcirculo(c), getRcirculo(c), getCORBcirculo(c), getCORPcirculo(c)); 
     }
     else if(tipo==tipo_retangulo){
         Retangulo* r = (Retangulo*) forma;
-        fprintf(txt, "  > Disparador %d: [RETANGULO] id %d, w=%.1f, h=%.1f, borda=%s, preench=%s esta na mira.\n",
+        fprintf(txt, "  > Disparador %d: [RETANGULO] id %d, w=%.1f, h=%.1f, borda= %s, preench= %s esta na mira.\n",
                 idDisparador, getIretangulo(r), getWretangulo(r), getHretangulo(r), getCORBretangulo(r), getCORPretangulo(r));
     }
     else if(tipo==tipo_linha){
@@ -70,7 +72,7 @@ void printSHFTarquivo(FILE* txt, tipoforma tipo, Forma forma, int idDisparador){
     }
     else if(tipo==tipo_texto){
         Texto* t = (Texto*) forma;
-        fprintf(txt, "  > Disparador %d: [TEXTO] id %d, (%lf,%lf), borda=%s, preench=%s, ancora=%c esta na mira.\n",
+        fprintf(txt, "  > Disparador %d: [TEXTO] id %d, (%lf,%lf), borda= %s, preench= %s, ancora=%c esta na mira.\n",
                 idDisparador, getItexto(t), getXtexto(t), getYtexto(t), getCORBtexto(t), getCORPtexto(t), getAtexto(t));
     }
 }
