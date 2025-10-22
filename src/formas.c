@@ -2,6 +2,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include "geo.h"
+#include "circulo.h"
+#include "retangulo.h"
+#include "linha.h"
+#include "texto.h"
 
 struct pacote{
     Forma forma;
@@ -109,50 +113,46 @@ Pacote clonarForma(Forma f, tipoforma tipo, int* nformas){
     double x, y;
     char* corb, *corp;
     Forma clone;
-    int tam = strlen(getCORBcirculo(f));
     if(tipo==tipo_circulo){
+        int tam = strlen(getCORBcirculo(f));
         x = getXcirculo(f);
         y = getYcirculo(f);
         double r = getRcirculo(f);
         corb = malloc(tam+1);
-        strcpy(corb,getCORBcirculo(f));
-        corp = malloc(tam+1);
-        strcpy(corp,getCORPcirculo(f));
+        corb = getCORBcirculo(f);
+        corp = getCORPcirculo(f);
         clone = criar_circulo(id, x, y, r, corb, corp);
     }
     else if(tipo==tipo_retangulo){
         x = getXretangulo(f);
         y = getYretangulo(f);
         double w = getWretangulo(f), h = getHretangulo(f);
-        corb = malloc(tam+1);
-        strcpy(corb,getCORBretangulo(f));
-        corp = malloc(tam+1);
-        strcpy(corp,getCORPretangulo(f));
+        corb = getCORBretangulo(f);
+        corp = getCORPretangulo(f);
         clone = criar_retangulo(id, x, y, w, h, corb, corp);
     }
     else if(tipo==tipo_linha){
+        int tam = strlen(getCORlinha(f));
         x = getX1linha(f);
         y = getY1linha(f);
         double x2 = getX2linha(f), y2 = getY2linha(f);
-        corb = malloc(tam+1);
-        strcpy(corb,getCORlinha(f));
+        corb = getCORlinha(f);
         clone = criar_linha(id, x, y, x2, y2, corb);
     }
     else if(tipo==tipo_texto){
+        int tam = strlen(getCORBtexto(f));
         x = getXtexto(f);
         y = getYtexto(f);
-        corb = malloc(tam+1);
-        strcpy(corb,getCORBtexto(f));
-        corp = malloc(tam+1);
-        strcpy(corp,getCORPtexto(f));
+        corb = getCORBtexto(f);
+        corp = getCORPtexto(f);
         char a = getAtexto(f);
         char* txto = getTXTOtexto(f);
         clone = criar_texto(id, x, y, corb, corp, a, txto);
     }
     *nformas += 1;
     Pacote pacote = criarPacote();
-    setTipoForma(pacote, tipo);
-    setFormaPacote(pacote, clone);
+    pacote->tipo = tipo;
+    pacote->forma = clone;
     return pacote;
 }
 
