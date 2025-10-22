@@ -18,7 +18,7 @@
 
 #define tamLinha 256
 
-void  leComandoQRY(FILE* qry,FILE* txt, FILE* svgQry, Fila chao, Fila listaDisp, Fila listaCar, Fila arena, double* total, int* nformas, Estilo ts){
+void  leComandoQRY(FILE* qry,FILE* txt, FILE* svgQry, Fila chao, Fila listaDisp, Fila listaCar, Fila arena, double* total, int* nformas){
     char* linhaQry = malloc(sizeof(char)*tamLinha);
     char comando[5];
     int  d, c, cesq, cdir, tipo;
@@ -199,7 +199,6 @@ void  leComandoQRY(FILE* qry,FILE* txt, FILE* svgQry, Fila chao, Fila listaDisp,
                         rodada += area_i;
                         fprintf(txt,"RESULTADO: Forma %d esmagada. Nova pontuacao: %2lf\n",id, rodada);
                         pushFila(chao, pacote2);
-                        printSVGforma(svgQry, tipo_j, forma_j, ts);
                         double xAncora = getXANCORAforma(forma_i, tipo);
                         double yAncora = getYANCORAforma(forma_i, tipo);
                         insere_asterisco(svgQry, xAncora, yAncora);
@@ -208,12 +207,9 @@ void  leComandoQRY(FILE* qry,FILE* txt, FILE* svgQry, Fila chao, Fila listaDisp,
                         fprintf(txt,"RESULTADO: Troca de cores e clonagem da forma %d\n",id);
                         trocaCor(pacote1,pacote2);
                         Pacote pacClone = clonarForma(forma_i, tipo_i, nformas);
-                        tipoforma tipo_clone = getTipoForma(pacClone);
-                        Forma clone = getFORMApacote(pacClone);
+                        pushFila(chao,pacote1);
+                        pushFila(chao,pacote2);
                         pushFila(chao, pacClone);
-                        printSVGforma(svgQry, tipo_i, forma_i, ts);
-                        printSVGforma(svgQry, tipo_j, forma_j, ts);
-                        printSVGforma(svgQry, tipo_clone, clone, ts);
                     }
                 }else{ // se nao ocorrer sobreposicao
                     tipoforma tipo_i = getTipoForma(pacote1), tipo_j = getTipoForma(pacote2);

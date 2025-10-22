@@ -6,6 +6,7 @@
 
 typedef void* Fila;
 typedef void* Forma;
+typedef void* Estilo;
 
 /// @brief Cria uma nova fila vazia
 /// @return Retorna um ponteiro para a fila
@@ -62,5 +63,10 @@ void destruir_chao(Fila chao);
 /// @brief Libera a memoria da arena
 /// @param f A arena
 void destruir_arena(Fila f);
+
+/// @brief Imprime o chao no arquivo svg
+/// @param f A fila
+/// @param txt Ponteiro para o arquivo svg
+void printar_fila(Fila f, FILE* svgQry, Estilo ts);
 
 #endif

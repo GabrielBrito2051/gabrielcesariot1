@@ -34,6 +34,6 @@
 /// @param total Ponteiro para a variavel que guarda a pontuacao total do jogo
 /// @param nformas Valor passado por referencia que indica a quantidade total de formas do chao inicial
 /// @param ts O estilo atual do texto
-void  leComandoQRY(FILE* qry,FILE* txt, FILE* svgQry, Fila chao, Fila listaDisp, Fila listaCar, Fila arena, double* total, int* nformas, Estilo ts);
+void  leComandoQRY(FILE* qry,FILE* txt, FILE* svgQry, Fila chao, Fila listaDisp, Fila listaCar, Fila arena, double* total, int* nformas);
 
 #endif

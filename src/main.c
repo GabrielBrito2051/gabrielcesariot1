@@ -109,7 +109,8 @@ int main(int argc, char* argv[])
    svgQry = abre_arquivo_escrita(arquivoSaidaSvgQry);
    startSVG(svgQry);
 
-   leComandoQRY(qry, txt, svgQry, chao, listaDisp, listaCar, arena, &total, &nformas, ts);
+   leComandoQRY(qry, txt, svgQry, chao, listaDisp, listaCar, arena, &total, &nformas);
+   printar_fila(chao,svgQry, ts);
    fechasvg(svgQry);
 
    fecha_arquivo(svgGeo);

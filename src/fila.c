@@ -3,6 +3,7 @@
 #include "fila.h"
 #include "formas.h"
 #include "disparador.h"
+#include "criarSvg.h"
 
 typedef struct ELEMENTO{
     Forma forma;
@@ -175,4 +176,16 @@ void destruir_arena(Fila f){
         free(apagar);
     }
     free(f);
+}
+
+void printar_fila(Fila f, FILE* svgQry,Estilo ts){
+    fila* var = (fila*)f;
+    if(var==NULL){
+        return;
+    }
+    pont atual = var->inicio;
+    while(atual!=NULL){
+        printSVGforma(svgQry,getTipoForma(atual->forma),getFORMApacote(atual->forma),ts);
+        atual = atual->prox;
+    }
 }
