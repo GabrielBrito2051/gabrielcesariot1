@@ -62,7 +62,7 @@ void popFila(Fila f){
     if(var->inicio==NULL){
         var->fim = NULL;
     }
-    free(apagar);
+    free(apagar); 
     var->tamanho--;
 }
 

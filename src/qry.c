@@ -128,6 +128,7 @@ void  leComandoQRY(FILE* qry,FILE* txt, FILE* svgQry, Fila chao, Fila listaDisp,
                 if(svg=='v'){
                     insere_dimensoes_disparo(svgQry, xdisp, ydisp, dx, dy);
                 }
+                pushFila(arena,disparado);
             }else{
                 fprintf(txt," > Disparador %d: Nenhuma forma foi disparada\n",getIDdisparador(procurado));
             }
@@ -169,6 +170,7 @@ void  leComandoQRY(FILE* qry,FILE* txt, FILE* svgQry, Fila chao, Fila listaDisp,
                     setXtexto(formadisparada,xdisp+dx+i*ix);
                     setYtexto(formadisparada,ydisp+dx+i*ix);
                 }
+                pushFila(arena,disparado);
                 printRJDarquivo(txt, tipo, formadisparada, getIDdisparador(procurado));
                 i++;
             }while(shift(procurado, lado)!=0);
@@ -182,9 +184,9 @@ void  leComandoQRY(FILE* qry,FILE* txt, FILE* svgQry, Fila chao, Fila listaDisp,
                 Pacote pacote2 = get_inicio_fila(arena);
                 popFila(arena);
                 Forma forma_i = getFORMApacote(pacote1), forma_j = getFORMApacote(pacote2);
-                if(verifica_sobreposicao(forma_i,forma_j)==1){
-                    Fila formasDestruidas = criar_fila();
-                    tipoforma tipo_i, tipo_j, id, jd;
+                if(verifica_sobreposicao(forma_i,forma_j)==1){  //se ocorrer sobreposciao
+                    tipoforma tipo_i, tipo_j;
+                    int id, jd;
                     double area_i, area_j;
                     tipo_i = getTipoForma(pacote1);
                     tipo_j = getTipoForma(pacote2);
@@ -193,46 +195,28 @@ void  leComandoQRY(FILE* qry,FILE* txt, FILE* svgQry, Fila chao, Fila listaDisp,
                     id = getIDforma(forma_i, tipo_i);
                     jd = getIDforma(forma_j, tipo_j);
                     fprintf(txt,"SOBREPOSICAO: Houve sobreposicao entre as formas %d e %d\n",id, jd);
-                    if(area_i<area_j){
+                    if(area_i<area_j){ //se ocorrer sobreposicao e i<j
                         rodada += area_i;
                         fprintf(txt,"RESULTADO: Forma %d esmagada. Nova pontuacao: %2lf\n",id, rodada);
-                        Pacote pac = criarPacote();
-                        setTipoForma(pac, tipo_i);
-                        setFormaPacote(pac, forma_i);
-                        pushFila(formasDestruidas, pac);
-                        Pacote pac2 = criarPacote();
-                        setTipoForma(pac2, tipo_j);
-                        setFormaPacote(pac2, forma_j);
-                        pushFila(chao, pac2);
+                        pushFila(chao, pacote2);
                         printSVGforma(svgQry, tipo_j, forma_j, ts);
-                        Forma destruida = getFORMApacote(pac);
-                        tipo = getTipoForma(pac);
-                        double xAncora = getXANCORAforma(destruida, tipo);
-                        double yAncora = getYANCORAforma(destruida, tipo);
+                        double xAncora = getXANCORAforma(forma_i, tipo);
+                        double yAncora = getYANCORAforma(forma_i, tipo);
                         insere_asterisco(svgQry, xAncora, yAncora);
-                    }else{
-                        tipoforma tipo_clone;
+                        destruirFormaPacote(pacote1);
+                    }else{ //se ocorrer sobreposicao e i>=j
                         fprintf(txt,"RESULTADO: Troca de cores e clonagem da forma %d\n",id);
-                        trocaCor(forma_i,forma_j);
-                        Forma clone = clonarForma(forma_i, tipo_i, nformas);
-                        tipo_clone = tipo_i;
-                        Pacote pac = criarPacote();
-                        setTipoForma(pac, tipo_i);
-                        setFormaPacote(pac,forma_i);
-                        pushFila(chao,pac);
-                        Pacote pac2 = criarPacote();
-                        setTipoForma(pac2, tipo_j);
-                        setFormaPacote(pac2, forma_j);
-                        pushFila(chao, pac2);
-                        Pacote pac3 = criarPacote();
-                        setTipoForma(pac3, tipo_clone);
-                        setFormaPacote(pac2, clone);
-                        pushFila(chao, pac3);
+                        trocaCor(pacote1,pacote2);
+                        Pacote pacClone = clonarForma(forma_i, tipo_i, nformas);
+                        tipoforma tipo_clone = getTipoForma(pacClone);
+                        Forma clone = getFORMApacote(pacClone);
+                        printf("-----------%d-----------",tipo_clone);
+                        pushFila(chao, pacClone);
                         printSVGforma(svgQry, tipo_i, forma_i, ts);
                         printSVGforma(svgQry, tipo_j, forma_j, ts);
                         printSVGforma(svgQry, tipo_clone, clone, ts);
                     }
-                }else{
+                }else{ // se nao ocorrer sobreposicao
                     tipoforma tipo_i = getTipoForma(pacote1), tipo_j = getTipoForma(pacote2);
                     int id = getIDforma(forma_i, tipo_i), jd = getIDforma(forma_j, tipo_j);
                     fprintf(txt,"SEM SOBREPOSICAO: Formas %d e %d voltam para o chao\n",id , jd);
