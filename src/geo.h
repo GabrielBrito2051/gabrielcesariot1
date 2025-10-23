@@ -23,6 +23,6 @@ Arquivo .h relacionado a leitura do arquivo geo
 /// @param nformas Valor passado por referencia que guarda a quantidade total de formas no chao inicial
 /// @param ts O estilo do texto
 /// @return retorna um ponteiro para a fila 'chao'
-void leGeo(FILE* geo, FILE* svgGeo, int* nformas, Estilo* ts, Fila chao);
+void leGeo(FILE* geo, FILE* svgGeo, int* nformas, Estilo ts, Fila chao);
 
 #endif

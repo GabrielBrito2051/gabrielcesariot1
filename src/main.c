@@ -103,9 +103,10 @@ int main(int argc, char* argv[])
     double total = 0;
     Estilo ts = criar_estilo("sans", "n", "12");
 
-   leGeo(geo, svgGeo, &nformas, &ts, chao);
+   leGeo(geo, svgGeo, &nformas, ts, chao);
    fechasvg(svgGeo);
 
+   return 0;
    svgQry = abre_arquivo_escrita(arquivoSaidaSvgQry);
    startSVG(svgQry);
 

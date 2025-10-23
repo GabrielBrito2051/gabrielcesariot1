@@ -67,7 +67,7 @@ void printSHFTarquivo(FILE* txt, tipoforma tipo, Forma forma, int idDisparador){
     }
     else if(tipo==tipo_linha){
         Linha* l = (Linha*) forma;
-        fprintf(txt, "  > Disparador %d: [LINHA] id %d, cor%s esta na mira.\n",
+        fprintf(txt, "  > Disparador %d: [LINHA] id %d, cor= %s esta na mira.\n",
                 idDisparador, getIlinha(l), getCORlinha(l));
     }
     else if(tipo==tipo_texto){
@@ -88,26 +88,26 @@ void printDSParquivo(FILE* txt, tipoforma tipo, Forma forma,int  idDisparador){
         Retangulo* r = (Retangulo*) forma;
         fprintf(txt, "  > Disparador %d: DISPAROU [RETANGULO] id %d.\n",
                 idDisparador, getIretangulo(r));
-                fprintf(txt," > Nova posicao: (%lf, %lf)",getXretangulo(r),getYretangulo(r));
+                fprintf(txt," > Nova posicao: (%lf, %lf)\n",getXretangulo(r),getYretangulo(r));
     }
     else if(tipo==tipo_linha){
         Linha* l = (Linha*) forma;
         fprintf(txt, "  > Disparador %d: DISPAROU [LINHA] id %d.\n",
                 idDisparador, getIlinha(l));
-                fprintf(txt," > Nova posicao: (%lf, %lf)",getX1linha(l),getY1linha(l));
+                fprintf(txt," > Nova posicao: (%lf, %lf)\n",getX1linha(l),getY1linha(l));
     }
     else if(tipo==tipo_texto){
         Texto* t = (Texto*) forma;
         fprintf(txt, "  > Disparador %d: DISPAROU [TEXTO] id %d.\n",
                 idDisparador, getItexto(t));
-                fprintf(txt," > Nova posicao: (%lf, %lf)",getXtexto(t),getYtexto(t));
+                fprintf(txt," > Nova posicao: (%lf, %lf)\n",getXtexto(t),getYtexto(t));
     }
 }
 
 void printRJDarquivo(FILE* txt, tipoforma tipo, Forma forma,int idDisparador){
     if(tipo==tipo_circulo){
         Circulo* c = (Circulo*) forma;
-        fprintf(txt, "  > Disparador %d: Disparou um [CIRCULO] id %d, (%.1f,%.1f), r=%.1f, borda=%s, preench=%s\n",
+        fprintf(txt, "  > Disparador %d: Disparou um [CIRCULO] id %d, (%.1f,%.1f), r=%.1f, borda= %s, preench= %s\n",
                 idDisparador,
                 getIcirculo(c), 
                 getXcirculo(c),
@@ -118,7 +118,7 @@ void printRJDarquivo(FILE* txt, tipoforma tipo, Forma forma,int idDisparador){
     }
     else if(tipo==tipo_retangulo){
        Retangulo* r = (Retangulo*) forma;
-        fprintf(txt, "  > Disparador %d: Disparou um [RETANGULO] id %d, (%.1f,%.1f), w=%.1f, h=%.1f, borda=%s, preench=%s\n",
+        fprintf(txt, "  > Disparador %d: Disparou um [RETANGULO] id %d, (%.1f,%.1f), w=%.1f, h=%.1f, borda= %s, preench= %s\n",
                 idDisparador,
                 getIretangulo(r),
                 getXretangulo(r),
@@ -130,7 +130,7 @@ void printRJDarquivo(FILE* txt, tipoforma tipo, Forma forma,int idDisparador){
     }
     else if(tipo==tipo_linha){
        Linha* l = (Linha*)forma;
-        fprintf(txt, "  > Disparador %d: Disparou um [LINHA] id %d, (%.1f,%.1f) -> (%.1f,%.1f), cor=%s\n",
+        fprintf(txt, "  > Disparador %d: Disparou um [LINHA] id %d, (%.1f,%.1f) -> (%.1f,%.1f), cor= %s\n",
                 idDisparador,
                 getIlinha(l),
                 getX1linha(l),

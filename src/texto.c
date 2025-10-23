@@ -104,6 +104,7 @@ Texto criar_texto(int i, double x, double y, char* corb, char* corp, char a, cha
         printf("Erro ao alocar memoria para o texto do texto");
         exit(1);
     }
+    strcpy(t->txto,txto);
 
     return ((texto*)t);
 }
