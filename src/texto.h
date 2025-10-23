@@ -153,4 +153,8 @@ void freeCorbTexto(Texto t);
 /// @param t O texto
 void freeCorpTexto(Texto t);
 
+/// @brief Libera a memoria do texto da forma texto
+/// @param t A forma texto
+void freeTXTOtexto(Texto t);
+
 #endif

@@ -178,3 +178,8 @@ void freeCorpTexto(Texto t){
     texto* var = (texto*)t;
     free(var->corp);
 }
+
+void freeTXTOtexto(Texto t){
+    texto* var = (texto*) t;
+    free(var->txto);
+}

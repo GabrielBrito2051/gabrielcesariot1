@@ -23,8 +23,7 @@ void insere_linha_svg(FILE* svg, Linha l){
 }
 
 void insere_texto_svg(FILE* svg, Texto t, Estilo ts){
-    printf("--%d--%s--%s--%s-- ",getItexto(t),getFAMILY(ts),getWEIGHT(ts),getSIZE(ts));
-    fprintf(svg, "<text id=\"%d\" style=\"font-size:%s;line-height:%s;fill:%s\" font-size=\"5\" y=\"%lf\" x=\"%lf\"> %s </text>\n", getItexto(t), getSIZE(ts),getWEIGHT(ts), getFAMILY(ts), getYtexto(t), getXtexto(t), getTXTOtexto(t));
+    fprintf(svg, "<text id=\"%d\" style=\"font-size=%s line-height= %s fill=%s\" font-size=\"5\" y=\"%lf\" x=\"%lf\"> %s </text>\n", getItexto(t), getSIZE(ts),getWEIGHT(ts), getFAMILY(ts), getYtexto(t), getXtexto(t), getTXTOtexto(t));
 }
 
 void insere_dimensoes_disparo(FILE* svg, double xdisp, double ydisp, double dx, double dy){

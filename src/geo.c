@@ -61,7 +61,7 @@ void leGeo(FILE* geo, FILE* svgGeo, int* nformas, Estilo ts, Fila chao){
             pushFila(chao, pac);
             insere_texto_svg(svgGeo, texto, ts);
         }
-        else if(tipo[0]=='t' && tipo[1]== 's'){
+        else if(strcpy(tipo, "ts")==0){
             sscanf(linhaGeo,"%*s %255s %1s %255s", font, weight, size);
             setFAMILY(ts, font);
             setWEIGHT(ts, weight);

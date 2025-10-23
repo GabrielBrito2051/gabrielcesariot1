@@ -291,6 +291,7 @@ void destruirFormaPacote(Pacote pac){
     else{
         freeCorpTexto(pac->forma);
         freeCorbTexto(pac->forma);
+        freeTXTOtexto(pac->forma);
     }
     free(pac->forma);
 }
