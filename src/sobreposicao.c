@@ -96,23 +96,23 @@ double getHbox(BoundingBox bb){
     return (((boundingbox*)bb)->h);
 }
 
-BoundingBox getBOXforma(Forma f1){
+BoundingBox getBOXforma(Pacote f1){
     double x, y, w, h;
     tipoforma tipo = getTipoForma(f1);
     if(tipo==tipo_circulo){
-        calculaBoxCirculo((Circulo)f1, &x, &y, &w, &h);
+        calculaBoxCirculo(getFORMApacote(f1), &x, &y, &w, &h);
     }
 
     else if(tipo == tipo_retangulo){
-        calculaBoxRetangulo((Retangulo)f1, &x, &y, &w, &h);
+        calculaBoxRetangulo(getFORMApacote(f1), &x, &y, &w, &h);
     }
 
     else if(tipo == tipo_linha){
-        calculaBoxLinha((Linha)f1, &x, &y, &w, &h);
+        calculaBoxLinha(getFORMApacote(f1), &x, &y, &w, &h);
     }
 
     else if(tipo == tipo_texto){
-        calculaBoxTexto((Texto)f1, &x, &y, &w, &h);
+        calculaBoxTexto(getFORMApacote(f1), &x, &y, &w, &h);
     }
 
     return criarBox(x, y, w, h);
@@ -141,15 +141,16 @@ int ColisaoDeBoxes(BoundingBox aa, BoundingBox bb){
     }
 }
 
-int colisaoCC(Circulo c1, Circulo c2){
+int colisaoCC(Pacote c1, Pacote c2){
+    Forma f1 = getFORMApacote(c1), f2 = getFORMApacote(c2);
     double r1, r2, distRaios, x1, y1, x2, y2;
-    r1 = getRcirculo(c1);
-    r2 = getRcirculo(c2);
+    r1 = getRcirculo(f1);
+    r2 = getRcirculo(f2);
     distRaios = r1 + r2;
-    x1 = getXcirculo(c1);
-    y1 = getYcirculo(c1);
-    x2 = getXcirculo(c2);
-    y2 = getYcirculo(c2);
+    x1 = getXcirculo(f1);
+    y1 = getYcirculo(f1);
+    x2 = getXcirculo(f2);
+    y2 = getYcirculo(f2);
     distRaios = distRaios * distRaios;
     double distCentros = (x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1);
 
@@ -166,9 +167,10 @@ double clamp(double valor, double min, double max){
     return valor;
 }
 
-int colisaoCR(Circulo c, Retangulo r){
-    double  cx = getXcirculo(c), cy = getYcirculo(c), cr = getRcirculo(c);
-    double rx = getXretangulo(r), ry = getYretangulo(r), rw = getWretangulo(r), rh = getHretangulo(r);
+int colisaoCR(Pacote c, Pacote r){
+    Forma r1 = getFORMApacote(r), c1 = getFORMApacote(c);
+    double  cx = getXcirculo(c1), cy = getYcirculo(c1), cr = getRcirculo(c1);
+    double rx = getXretangulo(r1), ry = getYretangulo(r1), rw = getWretangulo(r1), rh = getHretangulo(r1);
 
     double maisPertox = clamp(cx, rx, rx + rw);
     double maisPertoy = clamp(cy, ry, ry + rh);
@@ -184,8 +186,9 @@ int colisaoCR(Circulo c, Retangulo r){
     }
 }
 
-int colisaoCL(Circulo c, Linha l){
-    double  cx = getXcirculo(c), cy = getYcirculo(c), cr = getRcirculo(c);
+int colisaoCL(Pacote c, Pacote l){
+    Forma c1 = getFORMApacote(c);
+    double  cx = getXcirculo(c1), cy = getYcirculo(c1), cr = getRcirculo(c1);
     double x1, y1, x2, y2;
     getSegmentoLinha(l,&x1, &y1, &x2, &y2);
     double vetorx = x2 - x1;
@@ -215,8 +218,9 @@ int colisaoCL(Circulo c, Linha l){
     }
 }
 
-int colisaoRL(Retangulo r, Linha l){
-    double rx = getXretangulo(r), ry = getYretangulo(r), rw = getWretangulo(r), rh = getHretangulo(r);
+int colisaoRL(Pacote r, Pacote l){
+    Forma r1 = getFORMApacote(r);
+    double rx = getXretangulo(r1), ry = getYretangulo(r1), rw = getWretangulo(r1), rh = getHretangulo(r1);
     double x1, y1, x2, y2;
     getSegmentoLinha(l, &x1, &y1, &x2, &y2);
     double dx = x2 - x1;
@@ -256,7 +260,7 @@ int colisaoRL(Retangulo r, Linha l){
     }
 }
 
-int colisaoLL(Linha l1, Linha l2){
+int colisaoLL(Pacote l1, Pacote l2){
     double x1, y1, x2, y2, x3, y3, x4, y4;
     getSegmentoLinha(l1, &x1, &y1, &x2, &y2);
     getSegmentoLinha(l2, &x3, &y3, &x4, &y4);
@@ -275,7 +279,7 @@ int colisaoLL(Linha l1, Linha l2){
     return 0;
 }
 
-int verificaColisaoFormas(Forma f1, Forma f2){
+int verificaColisaoFormas(Pacote f1, Pacote f2){
     tipoforma tipo1 = getTipoForma(f1);
     tipoforma tipo2 = getTipoForma(f2);
 
@@ -327,7 +331,7 @@ int verificaColisaoFormas(Forma f1, Forma f2){
     
 }
 
-int verifica_sobreposicao(Forma f1, Forma f2){
+int verifica_sobreposicao(Pacote f1, Pacote f2){
     BoundingBox box1 = getBOXforma(f1);
     BoundingBox box2 = getBOXforma(f2);
 

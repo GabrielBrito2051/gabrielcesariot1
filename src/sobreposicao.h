@@ -81,15 +81,15 @@ double getHbox(BoundingBox bb);
 double distEntrePontos(double x1, double x2, double y1, double y2);
 
 /// @brief Cria e retorna a bounding box para qualquer forma generica
-/// @param f A forma que tera sua box criada
+/// @param f1 A forma que tera sua box criada
 /// @return Retornao ponteiro para a box criada
-BoundingBox getBOXforma(Forma f);
+BoundingBox getBOXforma(Pacote f1);
 
 /// @brief Verifica se ha sobreposicao entre dois circulos
 /// @param c1 O primeiro circulo
 /// @param c2 O segundo circulo
 /// @return Retorna 1 se ha a sobreposicao e 0 caso contrario
-int colisaoCC(Circulo c1, Circulo c2);
+int colisaoCC(Pacote c1, Pacote c2);
 
 /// @brief Funcao para "prender" um calor entre um minimo e um maximo
 /// @param valor O valor que se deseja prender
@@ -102,25 +102,25 @@ double clamp(double valor, double min, double max);
 /// @param c O circulo
 /// @param r O retuangulo
 /// @return  Retorna 1 se ha a sobreposicao e 0 caso contrario
-int colisaoCR(Circulo c, Retangulo r);
+int colisaoCR(Pacote c, Pacote r);
 
 /// @brief Verifica se existe sobreposicao entre um circulo e uma linha
 /// @param c O circulo
 /// @param l A linha
 /// @return  Retorna 1 se ha a sobreposicao e 0 caso contrario
-int colisaoCL(Circulo c, Linha l);
+int colisaoCL(Pacote c, Pacote l);
 
 /// @brief Verifica se ha sobreposicao entre um retangulo e uma linha
 /// @param r O retangulo
 /// @param l A linha
 /// @return  Retorna 1 se ha a sobreposicao e 0 caso contrario
-int colisaoRL(Retangulo r, Linha l);
+int colisaoRL(Pacote r, Pacote l);
 
 /// @brief Verifica se ha colisao entre duas linhas(textos inclusos)
 /// @param l1 A primeira linha
 /// @param l2 a segunda linha
 /// @return Retorna 1 se ha sobreposicao e 0 caso contrario
-int colisaoLL(Linha l1, Linha l2);
+int colisaoLL(Pacote l1, Pacote l2);
 
 /// @brief Compara se ha colisao entre duas bounding boxes
 /// @param aa A primeira bounding box
@@ -132,12 +132,12 @@ int ColisaoDeBoxes(BoundingBox aa, BoundingBox bb);
 /// @param f1 A primeira forma
 /// @param f2 A segunda forma
 /// @return Retorna 1 se houver a sobreposicao e 0 caso contrario
-int verificaColisaoFormas(Forma f1, Forma f2);
+int verificaColisaoFormas(Pacote f1, Pacote f2);
 
 /// @brief Funcao que engloba as funcoes de verificar a colisao de boxes e colisao das formas em si
 /// @param f1 A primeira forma
 /// @param f2 A segunda forma
 /// @return Retorna 1 se houver a sobreposicao e 0 caso contrario
-int verifica_sobreposicao(Forma f1, Forma f2);
+int verifica_sobreposicao(Pacote f1, Pacote f2);
 
 #endif

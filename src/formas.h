@@ -37,7 +37,7 @@ Forma getFORMApacote(Pacote pacote);
 /// @param y1 Ponteiro para armazenar a coordenada y1 da forma
 /// @param x2 Ponteiro para armazenar a coordenada x2 da forma
 /// @param y2 Ponteiro para armazenar a coordenada y2 da forma
-void getSegmentoLinha(Forma f, double* x1, double*y1, double *x2, double* y2);
+void getSegmentoLinha(Pacote f, double* x1, double*y1, double *x2, double* y2);
 
 /// @brief Pega o id de uma forma de acordo com seu tipo
 /// @param f A forma
