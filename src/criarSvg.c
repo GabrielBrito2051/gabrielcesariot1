@@ -23,7 +23,7 @@ void insere_linha_svg(FILE* svg, Linha l){
 }
 
 void insere_texto_svg(FILE* svg, Texto t, Estilo ts){
-    fprintf(svg, "<text id=\"%d\" style=\"font-size=%s line-height= %s fill=%s\" font-size=\"5\" y=\"%lf\" x=\"%lf\"> %s </text>\n", getItexto(t), getSIZE(ts),getWEIGHT(ts), getFAMILY(ts), getYtexto(t), getXtexto(t), getTXTOtexto(t));
+fprintf(svg, "<text id=\"%d\" x=\"%lf\" y=\"%lf\" style=\"font-family: '%s'; font-size: %spx; font-weight: %s; fill: %s;\"> %s </text>\n",getItexto(t), getXtexto(t),  getYtexto(t), getFAMILY(ts),getSIZE(ts),getWEIGHT(ts), getCORPtexto(t),  getTXTOtexto(t));
 }
 
 void insere_dimensoes_disparo(FILE* svg, double xdisp, double ydisp, double dx, double dy){
@@ -33,7 +33,7 @@ void insere_dimensoes_disparo(FILE* svg, double xdisp, double ydisp, double dx, 
 }
 
 void insere_asterisco(FILE* svg, double xDestruida, double yDestruida){
-    fprintf(svg,"<text fill=\"red\"y=\"%lf\" x=\"%lf\">*</text>\n",yDestruida, xDestruida);
+    fprintf(svg,"<text fill=\"red\" y=\"%lf\" x=\"%lf\" font-size=\"25\">*</text>\n",yDestruida, xDestruida);
 }
 
 void fechasvg(FILE* svg){

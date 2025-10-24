@@ -202,7 +202,7 @@ void  leComandoQRY(FILE* qry,FILE* txt, FILE* svgQry, Fila chao, Fila listaDisp,
                         double xAncora = getXANCORAforma(forma_i, tipo);
                         double yAncora = getYANCORAforma(forma_i, tipo);
                         insere_asterisco(svgQry, xAncora, yAncora);
-                        destruirFormaPacote(pacote1);
+                        freePacote(pacote1);
                     }else{ //se ocorrer sobreposicao e i>=j
                         fprintf(txt,"RESULTADO: Troca de cores e clonagem da forma %d\n",id);
                         trocaCor(pacote1,pacote2);
