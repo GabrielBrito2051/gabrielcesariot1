@@ -130,7 +130,7 @@ void printRJDarquivo(FILE* txt, tipoforma tipo, Forma forma,int idDisparador){
     }
     else if(tipo==tipo_linha){
        Linha* l = (Linha*)forma;
-        fprintf(txt, "  > Disparador %d: Disparou um [LINHA] id %d, (%.1f,%.1f) -> (%.1f,%.1f), cor= %s\n",
+        fprintf(txt, "  > Disparador %d: Disparou um [LINHA] id %d, (%.1f,%.1f), (%.1f,%.1f), cor= %s\n",
                 idDisparador,
                 getIlinha(l),
                 getX1linha(l),

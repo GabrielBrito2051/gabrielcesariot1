@@ -25,18 +25,19 @@ Forma getFORMApacote(Pacote pac){
     return pac->forma;
 }
 
-void getSegmentoLinha(Forma f, double* x1, double*y1, double *x2, double* y2){
+void getSegmentoLinha(Pacote f, double* x1, double*y1, double *x2, double* y2){
     tipoforma tipo = getTipoForma(f);
+    Forma l = getFORMApacote(f);
     if(tipo == tipo_linha){
-        *x1 = getX1linha(f);
-        *y1 = getY1linha(f);
-        *x2 = getX2linha(f);
-        *y2 = getY2linha(f);
+        *x1 = getX1linha(l);
+        *y1 = getY1linha(l);
+        *x2 = getX2linha(l);
+        *y2 = getY2linha(l);
     }else{
-        double xt = getXtexto(f);
-        double yt = getYtexto(f);
-        char ancora = getAtexto(f);
-        const char* conteudo = getTXTOtexto(f);
+        double xt = getXtexto(l);
+        double yt = getYtexto(l);
+        char ancora = getAtexto(l);
+        const char* conteudo = getTXTOtexto(l);
         int tamanho = strlen(conteudo);
 
         *y1 = yt;

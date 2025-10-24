@@ -115,8 +115,8 @@ void  leComandoQRY(FILE* qry,FILE* txt, FILE* svgQry, Fila chao, Fila listaDisp,
                     dxl = getX2linha(disparada) - getX1linha(disparada);
                     dyl = getY2linha(disparada) - getY1linha(disparada);
                     setX1linha(disparada, xdisp+dx);
-                    setX2linha(disparada,ydisp+dy);
-                    setY1linha(disparada, xdisp + dxl+dx);
+                    setY1linha(disparada,ydisp+dy);
+                    setX2linha(disparada, xdisp + dxl+dx);
                     setY2linha(disparada, ydisp+dyl+dy); 
                 }
 
@@ -161,8 +161,8 @@ void  leComandoQRY(FILE* qry,FILE* txt, FILE* svgQry, Fila chao, Fila listaDisp,
                     dxl = getX2linha(formadisparada) - getX1linha(formadisparada);
                     dyl = getY2linha(formadisparada) - getY1linha(formadisparada);
                     setX1linha(formadisparada, xdisp+dx+i*ix);
-                    setX2linha(formadisparada,ydisp+dy+i*iy);
-                    setY1linha(formadisparada, (xdisp + dxl+dx) + i*ix);
+                    setY1linha(formadisparada,ydisp+dy+i*iy);
+                    setX2linha(formadisparada, (xdisp + dxl+dx) + i*ix);
                     setY2linha(formadisparada, (ydisp+dyl+dy)+i*iy); 
                 }
 
@@ -184,7 +184,7 @@ void  leComandoQRY(FILE* qry,FILE* txt, FILE* svgQry, Fila chao, Fila listaDisp,
                 Pacote pacote2 = get_inicio_fila(arena);
                 popFila(arena);
                 Forma forma_i = getFORMApacote(pacote1), forma_j = getFORMApacote(pacote2);
-                if(verifica_sobreposicao(forma_i,forma_j)==1){  //se ocorrer sobreposciao
+                if(verifica_sobreposicao(pacote1,pacote2)==1){  //se ocorrer sobreposciao
                     tipoforma tipo_i, tipo_j;
                     int id, jd;
                     double area_i, area_j;
