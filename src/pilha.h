@@ -8,6 +8,10 @@
 typedef void* Pilha;
 typedef void* Forma;
 
+/*
+    Arquivo .h relacionado a uma estrutura de uma pilha, com funcaoes de inserir, remover e destruir
+*/
+
 /// @brief Cria uma nova pilha vazia
 /// @return Retorna um ponteiro para a pilha criada
 Pilha criar_pilha();

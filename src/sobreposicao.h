@@ -11,7 +11,7 @@
 #include "texto.h"
 
 /*
-    Arquivo .h relacionado a verificacao de sobreposicoes entre formas
+    Arquivo .h relacionado a verificacao de sobreposicoes entre formas na arena
 */
 
 typedef void* BoundingBox;

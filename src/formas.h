@@ -17,6 +17,10 @@ typedef enum{
 typedef struct  pacote* Pacote;
 typedef void* Forma;
 
+/*
+    Arquivo .h relacionado as formas genericas, com funcoes de get, set, calcular area, clonar e trocar cor, destruir e printar em arquivos
+*/
+
 /// @brief Cria um 'pacote' contendo a forma e o seu tipo
 /// @return Retorna o pacote criado
 Pacote criarPacote();
@@ -32,7 +36,7 @@ tipoforma getTipoForma(Pacote pac);
 Forma getFORMApacote(Pacote pacote);
 
 /// @brief Obtem as coordenadas do segmento de linha para as formas linha e texto
-/// @param f A forma
+/// @param f O pacote da forma
 /// @param x1 Ponteiro para armazenar a coordenada x1 da forma
 /// @param y1 Ponteiro para armazenar a coordenada y1 da forma
 /// @param x2 Ponteiro para armazenar a coordenada x2 da forma
@@ -98,9 +102,5 @@ void destruirFormaPacote(Pacote pac);
 /// @brief Libera memoria do pacote
 /// @param pac O pacote que sera liberado
 void freePacote(Pacote pac);
-
-/// @brief Libera a memoria do estilo
-/// @param ts O estilo
-void free_estilo(Estilo ts);
 
 #endif

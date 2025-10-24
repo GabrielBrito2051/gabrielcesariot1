@@ -8,6 +8,10 @@ typedef void* Fila;
 typedef void* Forma;
 typedef void* Estilo;
 
+/*
+    Arquivo .h relacionado a uma fila (talvez uma lista), com suas funcoes de insercao, remocao, busca, e percorre-la
+*/
+
 /// @brief Cria uma nova fila vazia
 /// @return Retorna um ponteiro para a fila
 Fila criar_fila();
@@ -66,7 +70,7 @@ void destruir_arena(Fila f);
 
 /// @brief Imprime o chao no arquivo svg
 /// @param f A fila
-/// @param txt Ponteiro para o arquivo svg
+/// @param svgQry Ponteiro para o arquivo svg
 void printar_fila(Fila f, FILE* svgQry, Estilo ts);
 
 #endif
