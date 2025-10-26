@@ -60,12 +60,12 @@ int main(int argc, char* argv[])
 
     char arquivoSaidaSvgQry[1024];
     if (strlen(nomeArquivoQry) > 0) {
-        snprintf(arquivoSaidaSvgQry, sizeof(arquivoSaidaSvgQry), "%s/%s.svg", dirSaida, onlyQry);
+        snprintf(arquivoSaidaSvgQry, sizeof(arquivoSaidaSvgQry)+sizeof(onlyQry), "%s/%s-%s.svg", dirSaida, nomeArquivoGeo, onlyQry);
     }
 
     char arquivoSaidaTxt[1024];
     if (strlen(nomeArquivoQry) > 0) {
-        snprintf(arquivoSaidaTxt, sizeof(arquivoSaidaTxt), "%s/%s.txt", dirSaida, onlyQry);
+        snprintf(arquivoSaidaTxt, sizeof(arquivoSaidaTxt)+sizeof(onlyQry), "%s/%s-%s.txt", dirSaida, nomeArquivoGeo, onlyQry);
     }
 
     FILE* geo = NULL;
