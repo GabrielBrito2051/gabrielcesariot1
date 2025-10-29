@@ -109,3 +109,13 @@ Forma getFormaNaMira(Disparador disp){
     disparador* castdisp = (disparador*)disp;
     return castdisp->pos_disparo;
 }
+
+void setXdisp(Disparador disp, double x){
+    disparador* var = (disparador*)disp;
+    var->x = x;
+}
+
+void setYdisp(Disparador disp, double y){
+    disparador* var = (disparador*)disp;
+    var->y = y;
+}

@@ -139,7 +139,6 @@ void destruir_fila_car(Fila f){
     while(atual!=NULL){
         apagar = atual;
         atual = atual->prox;
-        destruir_carregador(apagar->forma);
         free(apagar);
     }
     free(var);

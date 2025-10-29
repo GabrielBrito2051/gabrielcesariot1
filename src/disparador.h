@@ -66,4 +66,14 @@ double getYdisparador(Disparador disp);
 /// @return Retorna um ponteiro para a forma que esta na posicao de disparo
 Forma getFormaNaMira(Disparador disp);
 
+/// @brief Altera o valor da coordenada x do disparador
+/// @param disp O disparador
+/// @param x A nova coordenada x do disparador
+void setXdisp(Disparador disp, double x);
+
+/// @brief Altera o valor da coordenada y do disparador
+/// @param disp O disparador
+/// @param y A nova coordenada y do disparador
+void setYdisp(Disparador disp, double y);
+
 #endif

@@ -35,6 +35,9 @@ int getIDcarregador(Carregador car){
 
 void destruir_carregador(Carregador car){
     carregador* var = (carregador*) car;
+    if(var==NULL){
+        return;
+    }
     destruir_pilha(var->formas);
     free(var);
 }

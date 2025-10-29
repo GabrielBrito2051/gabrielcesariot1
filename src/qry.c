@@ -29,8 +29,14 @@ void  leComandoQRY(FILE* qry,FILE* txt, FILE* svgQry, Fila chao, Fila listaDisp,
         sscanf(linhaQry, "%s", comando);
         if(strcmp(comando, "pd")==0){
             sscanf(linhaQry, "%*s %d %lf %lf",&d, &x, &y);
-            Disparador novodisp = criar_disparador(d, x, y);
-            pushFila(listaDisp, novodisp);
+            Disparador disp = buscar_na_fila(listaDisp, compara_disp, d);
+            if(disp==NULL){
+                disp = criar_disparador(d, x, y);
+                pushFila(listaDisp, disp);
+            }else{
+                setXdisp(disp, x);
+                setYdisp(disp, y);
+            }
         }
 
         else if(strcmp(comando, "lc")==0){
