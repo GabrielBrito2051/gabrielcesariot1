@@ -325,7 +325,6 @@ int verificaColisaoFormas(Pacote f1, Pacote f2){
     else if(tipo1 == tipo_linha && tipo2 == tipo_retangulo){
         return colisaoRL(f2, f1);
     }else{
-        printf("Forma nao identificada!");
         return 0;
     }
     
