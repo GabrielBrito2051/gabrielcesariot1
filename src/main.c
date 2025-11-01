@@ -21,6 +21,8 @@ int main(int argc, char* argv[])
     char nomeArquivoGeo[FILE_NAME_LEN] = "";
     char nomeArquivoQry[FILE_NAME_LEN] = "";
     char onlyQry[FILE_NAME_LEN] = "";
+    char baseQry[FILE_NAME_LEN]="";
+    char baseGeo[FILE_NAME_LEN]="";
     int hasGeo = 0, hasSaida = 0;
 
     for (int i = 1; i < argc; i++) {
@@ -32,10 +34,22 @@ int main(int argc, char* argv[])
         } else if (strcmp(argv[i], "-f") == 0 && i + 1 < argc) {
             strcpy(nomeArquivoGeo, argv[++i]);
             hasGeo = 1;
+            char *pNome = strrchr(nomeArquivoGeo, '/');
+            strcpy(baseGeo, pNome ? pNome + 1 : nomeArquivoGeo);
+            char *pExt = strrchr(baseGeo, '.');
+            if (pExt && strcmp(pExt, ".geo") == 0) {
+                *pExt = '\0';
+            }
         } else if (strcmp(argv[i], "-q") == 0 && i + 1 < argc) {
             strcpy(nomeArquivoQry, argv[++i]);
             char *p = strrchr(argv[i], '/');
             strcpy(onlyQry, p ? p + 1 : argv[i]);
+            char *pNome = strrchr(nomeArquivoQry, '/');
+            strcpy(baseQry, pNome ? pNome + 1 : nomeArquivoQry);
+            char *pExt = strrchr(baseQry, '.');
+            if (pExt && strcmp(pExt, ".geo") == 0) {
+                *pExt = '\0';
+            }
         } else {
             fprintf(stderr, "Parametro desconhecido ou invalido: %s\n", argv[i]);
             return EXIT_FAILURE;
@@ -56,16 +70,16 @@ int main(int argc, char* argv[])
     }
 
     char arquivoSaidaSvgGeo[1024];
-    snprintf(arquivoSaidaSvgGeo, sizeof(arquivoSaidaSvgGeo), "%s/%s.svg", dirSaida, nomeArquivoGeo);
+    snprintf(arquivoSaidaSvgGeo, sizeof(arquivoSaidaSvgGeo), "%s/%s.svg", dirSaida, baseGeo);
 
     char arquivoSaidaSvgQry[1024];
     if (strlen(nomeArquivoQry) > 0) {
-        snprintf(arquivoSaidaSvgQry, sizeof(arquivoSaidaSvgQry)+sizeof(onlyQry), "%s/%s-%s.svg", dirSaida, nomeArquivoGeo, onlyQry);
+        snprintf(arquivoSaidaSvgQry, sizeof(arquivoSaidaSvgQry)+sizeof(onlyQry), "%s/%s-%s.svg", dirSaida, baseGeo, baseQry);
     }
 
     char arquivoSaidaTxt[1024];
     if (strlen(nomeArquivoQry) > 0) {
-        snprintf(arquivoSaidaTxt, sizeof(arquivoSaidaTxt)+sizeof(onlyQry), "%s/%s-%s.txt", dirSaida, nomeArquivoGeo, onlyQry);
+        snprintf(arquivoSaidaTxt, sizeof(arquivoSaidaTxt)+sizeof(onlyQry), "%s/%s-%s.txt", dirSaida, baseGeo, baseQry);
     }
 
     FILE* geo = NULL;
