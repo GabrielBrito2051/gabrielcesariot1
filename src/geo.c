@@ -72,6 +72,6 @@ void leGeo(FILE* geo, FILE* svgGeo, int* nformas, Estilo ts, Fila chao){
         }
     }
 
-    *nformas = getTAMANHOfila(chao) + i;
+    *nformas = getTAMANHOfila(chao) + extra;
     free(linhaGeo);
 }
